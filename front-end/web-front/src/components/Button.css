@@ -1,0 +1,36 @@
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn--nav, .btn--nav-outline {
+  font-size: 20px;
+  padding: 4px 16px;
+  border: 2px solid var(--primary-color);
+}
+
+.btn--nav{
+  background-color: var(--primary-color);
+  color: var(--met-red);
+}
+
+.btn--nav-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.btn--nav:hover{
+  transition: all 0.5s ease-out;
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid transparent;
+}
+
+.btn--nav-outline:hover {
+  transition: all 0.5s ease-out;
+  background-color: var(--primary-color);
+  color: var(--met-red);
+}

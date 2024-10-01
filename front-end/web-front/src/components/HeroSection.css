@@ -1,0 +1,26 @@
+.hero-container{
+  position: relative;
+  height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.headings{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.main-logo{
+  fill: var(--met-red);
+  width: 400px;
+}
+
+h1{
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--met-red);
+  text-align: center;
+}
