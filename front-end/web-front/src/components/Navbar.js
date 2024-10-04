@@ -1,76 +1,81 @@
-import React, {useState} from 'react';
-import './Navbar.css';
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import { ReactComponent as Logo } from '../assets/theMet.svg';
 import { ReactComponent as Close } from '../assets/close.svg';
 import { ReactComponent as Menu } from '../assets/menu.svg';
+import './Navbar.css';
+
+const NAV_ITEMS = [
+  { to: '/tour', label: 'Tour' },
+  { to: '/art-collection', label: 'Art Collection' },
+  { to: '/education', label: 'Education' },
+];
 
 function Navbar() {
-  const [click, setClick] = useState(false)
-  const [button, setButton] = useState(true)
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
-  const handleClick = () => setClick(!click)
-  const closeMobileMenu = () => setClick(false)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 960) {
+        setIsBurgerMenuOpen(false); // Reset burger menu when switching to desktop
+      }
+    };
 
-  const showButton = () => {
-    if(window.innerWidth <= 960) {
-      setButton(false)
-    } else {
-      setButton(true)
-    }
-  };
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  // TODO: when window > 960, reset mobile menu
-
-  window.addEventListener('resize', showButton);
+  const closeBurgerMenu = () => setIsBurgerMenuOpen(false);
 
   return (
-    <>
-      <nav className='navbar'>
-        <div className='navbar-container'>
-          <Link to='/' className='navbar-logo'  onClick={closeMobileMenu}>
-            <Logo className='logo'/>
-          </Link>
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/tour' className='nav-links' onClick={closeMobileMenu}>
-                Tour
+    <nav className="navbar" aria-label="Main navigation">
+      <div className="navbar-container">
+        <Link to="/" className="navbar-logo" onClick={closeBurgerMenu}>
+          <Logo className="logo" aria-label="The Metropolitan Museum of Art" />
+        </Link>
+
+        <ul className={`nav-menu ${isBurgerMenuOpen ? 'active' : ''}`}>
+          {NAV_ITEMS.map(({ to, label }) => (
+            <li key={to} className="nav-item">
+              <Link to={to} className="nav-links" onClick={closeBurgerMenu}>
+                {label}
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link to='/art-collection' className='nav-links' onClick={closeMobileMenu}>
-                Art Collection
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/education' className='nav-links' onClick={closeMobileMenu}>
-                Education
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='nav-links-mobile' className='nav-links-mobile' onClick={closeMobileMenu}> 
-                Sign Up
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='nav-links-mobile' className='nav-links-mobile' onClick={closeMobileMenu}> 
-                Login
-              </Link>
-            </li>
-          </ul>
-          <div className= "button-group">
-            {/* consider modifying button.css to include specific style for navbar */}
-            {button && <Button buttonStyle='btn--nav'>Sign up</Button>}
-            {button && <Button buttonStyle='btn--nav-outline'>Login</Button>}
+          ))}
+
+          <li className="nav-item mobile-only">
+            <Link to="/sign-up" className="nav-links-mobile" onClick={closeBurgerMenu}>
+              Sign Up
+            </Link>
+          </li>
+          <li className="nav-item mobile-only">
+            <Link to="/login" className="nav-links-mobile" onClick={closeBurgerMenu}>
+              Login
+            </Link>
+          </li>
+
+        </ul>
+        <div className="nav-menu-tablet">
+          <div className="button-group">
+            <Button buttonStyle="btn--nav" to="/sign-up" aria-label='Sign Up' >Sign Up</Button>
+            <Button buttonStyle="btn--nav-outline" to="/login" aria-label='Login'>Login</Button>
           </div>
-          <div className='menu-icon' onClick={handleClick}>
-            {click ? (<Close/>) : (<Menu/>)}
-          </div>
+
+          <button 
+            className="menu-icon"
+            onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)}
+            aria-expanded={isBurgerMenuOpen}
+            aria-label={isBurgerMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isBurgerMenuOpen ? <Close aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          </button>
         </div>
-      </nav>
-    </>
-  )
+      </div>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

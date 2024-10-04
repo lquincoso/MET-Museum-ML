@@ -1,16 +1,17 @@
 import React from 'react';
 import './Button.css';
 import { Link } from 'react-router-dom';
-const STYLES = ['btn--nav', 'btn--nav-outline'];
+const STYLES = ['btn--nav', 'btn--nav-outline', 'btn--landing'];
 
-export const Button = ({children, type, onClick, buttonStyle}) => {
+export const Button = ({children, onClick, buttonStyle, to, ariaLabel}) => {
     const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0];
 
     return (
-        <Link to='/sign-up' className='btn-mobile'>
-            <button className={`btn ${checkButtonStyle}`} onClick={onClick} type={type}>
+        <Link to={to} className='btn-mobile'>
+            <button className={`btn ${checkButtonStyle}`} aria-label={ariaLabel} onClick={onClick}>
                 {children}
             </button>
         </Link>
+        
     )
 }

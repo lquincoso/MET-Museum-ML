@@ -1,13 +1,15 @@
 .btn {
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   outline: none;
   border: none;
   cursor: pointer;
+  font: 'open sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .btn--nav, .btn--nav-outline {
-  font-size: 20px;
   padding: 4px 16px;
   border: 2px solid var(--primary-color);
 }
@@ -22,15 +24,27 @@
   color: var(--primary-color);
 }
 
-.btn--nav:hover{
-  transition: all 0.5s ease-out;
+.btn--nav:hover, .btn--nav:focus-visible{
+  transition: all 0.2s ease-in;
   background-color: transparent;
   color: var(--primary-color);
-  border: 2px solid transparent;
 }
 
-.btn--nav-outline:hover {
-  transition: all 0.5s ease-out;
+.btn--nav-outline:hover, .btn--nav-outline:focus-visible {
+  transition: all 0.2s ease-in;
+  background-color: var(--primary-color);
+  color: var(--met-red);
+}
+
+.btn--landing {
+  background-color: var(--met-red);
+  color: var(--primary-color);
+  width: 240px;
+  border-radius: 20px;
+  border: 3px solid var(--met-red);
+}
+
+.btn--landing:hover, .btn--landing:focus-visible {
   background-color: var(--primary-color);
   color: var(--met-red);
 }

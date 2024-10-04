@@ -1,155 +1,171 @@
+:root {
+  --nav-height: 60px;
+  --logo-width: 50px;
+  --flex-basis: 220px;
+  --underline: 3px;
+  --link-font: 20px;
+  --link-hover: .2s;
+}
 .navbar {
   background: var(--met-red);
-  height: 60px;
+  height: var(--nav-height);
   position: sticky;
+  display: grid;
   top: 0;
   z-index: 999;
 }
 
 .navbar-container {
   width: 100%;
-  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 30px;
 }
 
 .navbar-logo {
-  margin-left: 30px;
-  font: none;
   cursor: pointer;
-  flex-basis: 225px;
+  flex-basis:var(--flex-basis);
 }
 
 /* logo vector styling */
 .logo{
+  display: block;
   fill: var(--primary-color);
-  width: 50px;
+  width: var(--logo-width);
 }
 
 .nav-menu {
-  /* list-style: none; */
   display: flex;
   justify-content: center;
   align-items: center;
-  width: auto;
-}
-
-.nav-menu > *:nth-last-child(-n+2) {
-  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* page links */
 .nav-item {
   display: inline-block;
-  text-align: center;
-  padding: 0px 20px; /* (top, bottom) (left, right)*/
+  padding: 0 15px; /* (top, bottom) (left, right)*/
 }
 
 .nav-links {
   font-weight: bold;
-  font-size: 20px;
+  font-size: var(--link-font);
   color: var(--primary-color);
   text-decoration: none;
+  transition: border-bottom var(--link-hover) ease;
+}
+
+/* when cursor hovers over or tabs focus */
+.nav-links:hover, .nav-links:focus {
+  border-bottom: var(--underline) solid var(--primary-color);
 }
 
 .button-group {
-  flex-basis: 225px;
+  flex-basis: var(--flex-basis);
   display: flex;
-  justify-content: center;
-  align-items: left;
-  align-content: space-between;
-  margin-right: 20px;
+  justify-content: flex-end;
 }
 
 .button-group > :first-child {
   margin-right: 15px;
 }
 
-.nav-links:hover {
-  border-bottom: 4px solid var(--primary-color);
-  transition: all 0.2s ease-out;
-}
-
 .nav-links-mobile {
   display: none;
-  padding: 0px 0px;
+  padding: 0 0;
 }
 
 .menu-icon {
   display: none;
 }
 
+.mobile-only{
+  display: none;
+}
+
 @media screen and (max-width: 960px) {
-  .navbar-logo {
-    position: absolute;
+  .navbar-container{
+    display: flex;
+    padding: 0 15px;
   }
 
+  .nav-menu-tablet{
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+  }
+
+  .navbar-logo {
+    flex-basis: none;
+    justify-content: flex-start;
+  }
+
+  .button-group{
+    flex-basis: none;   
+  }
   .menu-icon {
     display: block;
+    background-color: transparent;
+    border: none;
     stroke: var(--primary-color);
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: .75rem 30px;
+    justify-content: flex-end;
     cursor: pointer;
   }
     
   .nav-menu {
-    display: flex;
+    position: absolute;
     flex-direction: column;
     width: 50%;
-    height: auto;
-    position: absolute;
-    top: 60px;
+    top: var(--nav-height);
     right: -100%;
     opacity: 1;
-    border-bottom: 1rem solid var(--met-red);
-    transition: all 0.5s ease;
-  }
-  .nav-menu > *:nth-last-child(-n+2) {
-    display: block;
-  }
-  .nav-menu.active {
     background: var(--met-red);
-    right: 0;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
+    border-bottom: var(--underline) solid var(--met-red);
   }
 
+  .nav-menu.active {
+    right: 0;
+  }
+  
   .nav-links {
     text-align: center;
-    padding: 1rem;
+    padding: 10px;
     width: 100%;
     display: table;
-    font-size: 1rem;
+  }
+  
+  .nav-links:hover, .nav-links:focus {
+    border-bottom: var(--underline) solid var(--primary-color);
   }
 
-  .nav-links:hover {
-    border-bottom: 4px solid var(--primary-color);
-    transition: all 0.2s ease-out;
+}
+
+@media screen and (max-width: 600px) { 
+
+  .button-group{
+    display: none;  
   }
 
+  .mobile-only{
+    display: block;
+  }
+  
   .nav-links-mobile {
     display: block;
     text-align: center;
     margin: auto auto;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: var(--link-font);
     font-weight: bold;
     color: var(--primary-color);
-    padding: 15px 5px;
-    transition: all 0.5s ease;
+    padding: 15px;
   }
   
-  .nav-links-mobile:hover {
-    border-bottom: 4px solid var(--primary-color);
-    transition: all 0.2s ease-out;
+  .nav-links-mobile:hover, .nav-links-mobile:focus {
+    border-bottom: var(--underline) solid var(--primary-color);
+    transition: border-bottom var(--link-hover) ease;
   }
-
-  .button-group {
-    display: none;
-  }
-
-}
+} 
