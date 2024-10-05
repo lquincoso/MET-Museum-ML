@@ -7,8 +7,9 @@ export const Button = ({children, onClick, buttonStyle, to, ariaLabel}) => {
     const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0];
 
     return (
-        <Link to={to} className='btn-mobile'>
-            <button className={`btn ${checkButtonStyle}`} aria-label={ariaLabel} onClick={onClick}>
+        <Link to={to}>            <button 
+                className={`btn ${checkButtonStyle}`} 
+                aria-label={ariaLabel} onClick={onClick}>
                 {children}
             </button>
         </Link>
