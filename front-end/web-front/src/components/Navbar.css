@@ -12,7 +12,7 @@
   position: sticky;
   display: grid;
   top: 0;
-  z-index: 999;
+  z-index: 100;
 }
 
 .navbar-container {
@@ -90,6 +90,7 @@
   .navbar-container{
     display: flex;
     padding: 0 15px;
+    position: sticky;
   }
 
   .nav-menu-tablet{
@@ -124,10 +125,12 @@
     opacity: 1;
     background: var(--met-red);
     border-bottom: var(--underline) solid var(--met-red);
+    display: none;
   }
 
   .nav-menu.active {
     right: 0;
+    display: grid;
   }
   
   .nav-links {

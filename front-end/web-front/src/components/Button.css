@@ -1,5 +1,4 @@
 .btn {
-  padding: 10px 20px;
   border-radius: 10px;
   outline: none;
   border: none;
@@ -7,10 +6,11 @@
   font: 'open sans', sans-serif;
   font-size: 20px;
   font-weight: 600;
+  text-wrap: nowrap;
 }
 
 .btn--nav, .btn--nav-outline {
-  padding: 4px 16px;
+  padding: 4px 15px;
   border: 2px solid var(--primary-color);
 }
 
@@ -37,6 +37,7 @@
 }
 
 .btn--landing {
+  padding: 10px 20px;
   background-color: var(--met-red);
   color: var(--primary-color);
   width: 240px;
@@ -47,4 +48,12 @@
 .btn--landing:hover, .btn--landing:focus-visible {
   background-color: var(--primary-color);
   color: var(--met-red);
+}
+
+.btn--login-signup {
+  background-color: var(--met-red);
+  height: 60px;
+  width: 100%;
+  border-radius: 35px;
+  color: var(--primary-color);
 }

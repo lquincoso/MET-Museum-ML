@@ -34,9 +34,9 @@ h1{
 
 .cta-buttons {
   display: flex;
+  direction: row;
   gap: 2rem;
   margin-top: 1rem;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
