@@ -30,10 +30,10 @@ function SignUp() {
       <div className='form-container'>
         <h1 className='title'>Sign up</h1>
         <form className='login-signup-form' onSubmit={handleSubmit}>
-          <InputField className='input--credentials' type='text' placeholder='Username' name='username' value='' onChange={e => setUsername(e.target.value)}/>
-          <InputField className='input--credentials' type='email' placeholder='Email' name='email' value='' onChange={e => setEmail(e.target.value)}/>
-          <InputField className='input--credentials' type='password' placeholder='Password' name='password' value='' onChange={e => setPassword(e.target.value)}/>
-          <InputField className='input--credentials' type='password' placeholder='Password' name='password' value='' onChange={e => setPassword2(e.target.value)}/>
+          <InputField inputStyle='input--credentials' type='text' placeholder='Username' name='username' value={username} onChange={e => setUsername(e.target.value)}/>
+          <InputField inputStyle='input--credentials' type='email' placeholder='Email' name='email' value={email} onChange={e => setEmail(e.target.value)}/>
+          <InputField inputStyle='input--credentials' type='password' placeholder='Password' name='password' value={password} onChange={e => setPassword(e.target.value)}/>
+          <InputField inputStyle='input--credentials' type='password' placeholder='Password' name='password' value={password2} onChange={e => setPassword2(e.target.value)}/>
           <div className='btn-wrapper'>
             <Button buttonStyle='btn--login-signup' type ='submit' to='/' aria-label='sign up'>sign up</Button>
           </div>

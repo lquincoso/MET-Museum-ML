@@ -19,8 +19,8 @@ function Login() {
       <div className='form-container'>
         <h1 className='title'>Login</h1>
         <form className='login-signup-form' onSubmit={submit}>
-          <InputField className='email' type='input--credentials' placeholder='Email' name='email' value='' onChange=''/>
-          <InputField className='password' type='input--credentials' placeholder='Password' name='password' value='' onChange=''/>
+          <InputField inputStyle='input--credentials' type='text' placeholder='Username' name='username' value={username} onChange={e => setUsername(e.target.value)}/>
+          <InputField inputStyle='input--credentials' type='password' placeholder='Password' name='password' value={password} onChange={e => setPassword(e.target.value)}/>
           <div className='btn-wrapper'>
             <Button buttonStyle='btn--login-signup' to='/' aria-label='Login'>Login</Button>
           </div>
