@@ -115,6 +115,26 @@
     justify-content: flex-end;
     cursor: pointer;
   }
+
+  .favorite-icon {
+    display: block;
+    background-color: transparent;
+    border: none;
+    stroke: var(--primary-color);
+    stroke-width: 2.5px;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .user-icon {
+    display: block;
+    background-color: var(--primary-color);
+    border: none;
+    stroke: var(--met-red);
+    stroke-width: 2.5px;
+    justify-content: center;
+    cursor: pointer;
+  }
     
   .nav-menu {
     position: absolute;
@@ -139,6 +159,8 @@
     width: 100%;
     display: table;
   }
+
+
   
   .nav-links:hover, .nav-links:focus {
     border-bottom: var(--underline) solid var(--primary-color);

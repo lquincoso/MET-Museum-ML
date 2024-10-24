@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import jwtDecode from "jwt-decode";
-import AuthContext from "../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import { ReactComponent as Logo } from "../assets/theMet.svg";
 import { ReactComponent as Close } from "../assets/close.svg";
 import { ReactComponent as Menu } from "../assets/menu.svg";
+import { ReactComponent as Favorite } from "../assets/favorite.svg";
+import { ReactComponent as User } from "../assets/user.svg";
+import AuthContext from "../context/AuthContext";
 import "./Navbar.css";
 
 const NAV_ITEMS = [
@@ -15,12 +17,12 @@ const NAV_ITEMS = [
 ];
 
 function Navbar() {
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const { user, logoutUser } = useContext(AuthContext);
   const token = localStorage.getItem("authTokens");
-  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   if (token) {
-    const decoded = jwt_decode(token);
+    const decoded = jwtDecode(token);
     var user_id = decoded.user_id;
   }
 
@@ -54,38 +56,84 @@ function Navbar() {
               </Link>
             </li>
           ))}
-
-          <li className="nav-item mobile-only">
-            <Link
-              to="/sign-up"
-              className="nav-links-mobile"
-              onClick={closeBurgerMenu}
-            >
-              Sign Up
-            </Link>
-          </li>
-          <li className="nav-item mobile-only">
-            <Link
-              to="/login"
-              className="nav-links-mobile"
-              onClick={closeBurgerMenu}
-            >
-              Login
-            </Link>
-          </li>
+          {token === null && (
+            <>
+              <li className="nav-item mobile-only">
+                <Link
+                  to="/sign-up"
+                  className="nav-links-mobile"
+                  onClick={closeBurgerMenu}
+                >
+                  Sign Up
+                </Link>
+              </li>
+              <li className="nav-item mobile-only">
+                <Link
+                  to="/login"
+                  className="nav-links-mobile"
+                  onClick={closeBurgerMenu}
+                >
+                  Login
+                </Link>
+              </li>
+            </>
+          )}
+          {token !== null && (
+            <>
+              <li className="nav-item mobile-only">
+                <Link
+                  to="/"
+                  className="nav-links-mobile"
+                  onClick={closeBurgerMenu}
+                >
+                  Favorites
+                </Link>
+              </li>
+              <li className="nav-item mobile-only">
+                <Link
+                  to="/"
+                  className="nav-links-mobile"
+                  onClick={closeBurgerMenu}
+                >
+                  Logout
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
         <div className="nav-menu-tablet">
           <div className="button-group">
-            <Button buttonStyle="btn--nav" to="/sign-up" aria-label="Sign Up">
-              Sign Up
-            </Button>
-            <Button
-              buttonStyle="btn--nav-outline"
-              to="/login"
-              aria-label="Login"
-            >
-              Login
-            </Button>
+            {token === null && (
+              <>
+                <Button
+                  buttonStyle="btn--nav"
+                  to="/sign-up"
+                  aria-label="Sign Up"
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  buttonStyle="btn--nav-outline"
+                  to="/login"
+                  aria-label="Login"
+                >
+                  Login
+                </Button>
+              </>
+            )}
+            {token !== null && (
+              <>
+                <button className="favorite-icon" aria-label="Favorites">
+                  <Favorite />
+                </button>
+                <button
+                  className="user-icon"
+                  aria-label="User"
+                >
+                  <User />
+                </button>
+              </>
+            )}
           </div>
 
           <button
