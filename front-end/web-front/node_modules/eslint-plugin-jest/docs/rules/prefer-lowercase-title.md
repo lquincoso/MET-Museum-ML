@@ -1,5 +1,10 @@
 # Enforce lowercase test names (`prefer-lowercase-title`)
 
+🔧 This rule is automatically fixable by the
+[`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+<!-- end auto-generated rule header -->
+
 ## Rule details
 
 Enforce `it`, `test` and `describe` to have descriptions that begin with a
@@ -73,8 +78,8 @@ it('Uppercase description');
 
 ### `allowedPrefixes`
 
-This array option allows specifying prefixes which contain capitals that titles
-can start with. This can be useful when writing tests for api endpoints, where
+This array option allows specifying prefixes, which contain capitals that titles
+can start with. This can be useful when writing tests for API endpoints, where
 you'd like to prefix with the HTTP method.
 
 By default, nothing is allowed (the equivalent of `{ "allowedPrefixes": [] }`).
