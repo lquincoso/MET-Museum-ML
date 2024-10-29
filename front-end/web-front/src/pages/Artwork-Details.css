@@ -1,29 +1,84 @@
-
-.artwork-container{
-    height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.artwork-container {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-.left-container, .right-container{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin: 0 30px;
-    padding: 30px 0;
+.left-container,
+.right-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 30px;
+  padding: 25px 0;
 }
 
+.artwork-image{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(223, 223, 238);
+  object-fit: cover;
+}
 
-.artwork-title{
-    font-size: 4rem;
-    font-family: ;
-    font-weight: 700;
-    margin-bottom: 20px;
+.rating{
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
 
+.stars{
+  color: var(--met-red);
+  margin-right: 15px;
+}
+
+.artwork-title {
+  font-size: 4rem;
+  font-family: "playfair display";
+  font-weight: bold;
+  line-height: 90%;
+  margin-bottom: 15px;
+  color: var(--met-red);
+}
+
+.artwork-location {
+  font-size: 1.1rem;
+  font-family: "open sans";
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: var(--secondary-color);
+}
+
+.art-info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; 
+}
+
+.art-info-label {
+  font-size: 1.20rem;
+  font-weight: 780;
+  margin-right: 8px; 
+}
+
+.art-info-value{
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.about-text{
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.resources-text{
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
