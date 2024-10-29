@@ -53,7 +53,7 @@ function Navbar() {
           to="/"
           className="navbar-logo"
           onClick={() => {
-            logoutUser();
+            closeUserMenu();
             closeBurgerMenu();
           }}
         >
@@ -67,7 +67,7 @@ function Navbar() {
                 to={to}
                 className="nav-links"
                 onClick={() => {
-                  logoutUser();
+                  closeUserMenu();
                   closeBurgerMenu();
                 }}
               >
@@ -105,7 +105,7 @@ function Navbar() {
                   to="/"
                   className="nav-links-mobile"
                   onClick={() => {
-                    logoutUser();
+                    closeUserMenu();
                     closeBurgerMenu();
                   }}
                 >
