@@ -18,6 +18,7 @@ const NAV_ITEMS = [
 
 function Navbar() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { user, logoutUser } = useContext(AuthContext);
   const token = localStorage.getItem("authTokens");
 
@@ -31,6 +32,9 @@ function Navbar() {
       if (window.innerWidth > 960) {
         setIsBurgerMenuOpen(false); // Reset burger menu when switching to desktop
       }
+      if (window.innerWidth > 768) {
+        setIsUserMenuOpen(false); // Reset user menu when switching to tablet
+      }
     };
 
     handleResize(); // Initial check
@@ -40,18 +44,33 @@ function Navbar() {
   }, []);
 
   const closeBurgerMenu = () => setIsBurgerMenuOpen(false);
+  const closeUserMenu = () => setIsUserMenuOpen(false);
 
   return (
     <nav className="navbar" aria-label="Main navigation">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo" onClick={closeBurgerMenu}>
+        <Link
+          to="/"
+          className="navbar-logo"
+          onClick={() => {
+            logoutUser();
+            closeBurgerMenu();
+          }}
+        >
           <Logo className="logo" aria-label="The Metropolitan Museum of Art" />
         </Link>
 
         <ul className={`nav-menu ${isBurgerMenuOpen ? "active" : ""}`}>
           {NAV_ITEMS.map(({ to, label }) => (
             <li key={to} className="nav-item">
-              <Link to={to} className="nav-links" onClick={closeBurgerMenu}>
+              <Link
+                to={to}
+                className="nav-links"
+                onClick={() => {
+                  logoutUser();
+                  closeBurgerMenu();
+                }}
+              >
                 {label}
               </Link>
             </li>
@@ -80,11 +99,15 @@ function Navbar() {
           )}
           {token !== null && (
             <>
+              {/* navivate to fave */}
               <li className="nav-item mobile-only">
                 <Link
                   to="/"
                   className="nav-links-mobile"
-                  onClick={closeBurgerMenu}
+                  onClick={() => {
+                    logoutUser();
+                    closeBurgerMenu();
+                  }}
                 >
                   Favorites
                 </Link>
@@ -93,7 +116,10 @@ function Navbar() {
                 <Link
                   to="/"
                   className="nav-links-mobile"
-                  onClick={closeBurgerMenu}
+                  onClick={() => {
+                    logoutUser();
+                    closeBurgerMenu();
+                  }}
                 >
                   Logout
                 </Link>
@@ -128,17 +154,49 @@ function Navbar() {
                 </button>
                 <button
                   className="user-icon"
-                  aria-label="User"
+                  onClick={() => {
+                    setIsUserMenuOpen(!isUserMenuOpen);
+                    closeBurgerMenu();
+                  }}
+                  aria-expanded={isUserMenuOpen}
+                  aria-label={
+                    isUserMenuOpen ? "Close user menu" : "Open user menu"
+                  }
                 >
                   <User />
                 </button>
               </>
             )}
           </div>
-
+          <ul className={`user-menu ${isUserMenuOpen ? "active" : ""}`}>
+            <li className="user-menu-item">
+              <Link
+                to={`/user/${user_id}`}
+                className="user-menu-links"
+                onClick={closeUserMenu}
+              >
+                Profile
+              </Link>
+            </li>
+            <li className="user-menu-item">
+              <Link
+                to="/"
+                className="user-menu-links"
+                onClick={() => {
+                  logoutUser();
+                  closeUserMenu();
+                }}
+              >
+                Logout
+              </Link>
+            </li>
+          </ul>
           <button
             className="menu-icon"
-            onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)}
+            onClick={() => {
+              setIsBurgerMenuOpen(!isBurgerMenuOpen);
+              closeUserMenu();
+            }}
             aria-expanded={isBurgerMenuOpen}
             aria-label={isBurgerMenuOpen ? "Close menu" : "Open menu"}
           >
