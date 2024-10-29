@@ -19,7 +19,7 @@ function Login() {
   };
 
   return (
-    <div className="main">
+    <div className="main-container">
       <div className="form-container">
         <h1 className="title">Login</h1>
         <form className="login-signup-form" onSubmit={handleSubmit}>

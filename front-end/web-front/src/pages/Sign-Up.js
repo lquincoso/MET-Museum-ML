@@ -12,7 +12,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const {registerUser} = useContext(AuthContext);
+  const { registerUser } = useContext(AuthContext);
 
   console.log(email);
   console.log(username);
@@ -25,13 +25,13 @@ function SignUp() {
   };
 
   return (
-    <div className="main">
+    <div className="main-container">
       <div className="form-container">
         <h1 className="title">Sign up</h1>
         <form className="login-signup-form" onSubmit={handleSubmit}>
           <InputField
             inputStyle="input--credentials"
-            id='login-signup-form'
+            id="login-signup-form"
             type="text"
             placeholder="Username"
             name="username"
@@ -39,7 +39,7 @@ function SignUp() {
           />
           <InputField
             inputStyle="input--credentials"
-            id='login-signup-form'
+            id="login-signup-form"
             type="email"
             placeholder="Email"
             name="email"
@@ -47,7 +47,7 @@ function SignUp() {
           />
           <InputField
             inputStyle="input--credentials"
-            id='login-signup-form'
+            id="login-signup-form"
             type="password"
             placeholder="Password"
             name="password"
@@ -55,7 +55,7 @@ function SignUp() {
           />
           <InputField
             inputStyle="input--credentials"
-            id='login-signup-form'
+            id="login-signup-form"
             type="password"
             placeholder="CConfirm Password"
             name="password"

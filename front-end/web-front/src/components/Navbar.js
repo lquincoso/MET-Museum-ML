@@ -19,7 +19,7 @@ const NAV_ITEMS = [
 function Navbar() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const { user, logoutUser } = useContext(AuthContext);
+  const {logoutUser} = useContext(AuthContext);
   const token = localStorage.getItem("authTokens");
 
   if (token) {
