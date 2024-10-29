@@ -1,3 +1,11 @@
+:root {
+  --star-color-1: #ff0000;
+  --star-color-2: #f8983e;
+  --star-color-3: #ffc107;
+  --star-color-4: #9bec50;
+  --star-color-5: #6dbb23;
+}
+
 .artwork-container {
   height: calc(100vh - 60px);
   display: flex;
@@ -19,22 +27,50 @@
   padding: 25px 0;
 }
 
-.artwork-image{
+.artwork-image {
   width: 100%;
   height: 100%;
   background-color: rgb(223, 223, 238);
   object-fit: cover;
 }
 
-.rating{
+.rating {
   display: flex;
   align-items: center;
   margin-top: 15px;
 }
 
-.stars{
-  color: var(--met-red);
+.stars {
   margin-right: 15px;
+  background-color: transparent;
+  border: none;
+}
+
+.star {
+  fill: var(--star-color);
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.star.star-clicked {
+  stroke: var(--secondary-color);
+  stroke-width: 4;
+  opacity: 1;
+}
+
+.star.star-clicked:hover {
+  opacity: 1;
+  stroke-width: 6;
+}
+
+.star.star-inactive {
+  opacity: 0.4;
+}
+
+.star.star-inactive:hover {
+  opacity: 0.9;
+  stroke: gray;
+  stroke-width: 3;
 }
 
 .artwork-title {
@@ -47,9 +83,9 @@
 }
 
 .artwork-location {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-family: "open sans";
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 15px;
   color: var(--secondary-color);
 }
@@ -57,27 +93,27 @@
 .art-info-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .art-info-label {
-  font-size: 1.20rem;
+  font-size: 1.2rem;
   font-weight: 780;
-  margin-right: 8px; 
+  margin-right: 8px;
 }
 
-.art-info-value{
+.art-info-value {
   font-size: 1.15rem;
   font-weight: 500;
 }
 
-.about-text{
+.about-text {
   font-size: 1.15rem;
   font-weight: 500;
   margin-bottom: 10px;
 }
 
-.resources-text{
+.resources-text {
   font-size: 1.15rem;
   font-weight: 500;
   margin-bottom: 10px;

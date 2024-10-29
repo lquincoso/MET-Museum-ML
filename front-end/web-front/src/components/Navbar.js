@@ -19,7 +19,7 @@ const NAV_ITEMS = [
 function Navbar() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const {logoutUser} = useContext(AuthContext);
+  const { logoutUser } = useContext(AuthContext);
   const token = localStorage.getItem("authTokens");
 
   if (token) {
@@ -53,7 +53,7 @@ function Navbar() {
           to="/"
           className="navbar-logo"
           onClick={() => {
-            logoutUser();
+            closeUserMenu();
             closeBurgerMenu();
           }}
         >
@@ -67,7 +67,7 @@ function Navbar() {
                 to={to}
                 className="nav-links"
                 onClick={() => {
-                  logoutUser();
+                  closeUserMenu();
                   closeBurgerMenu();
                 }}
               >
@@ -105,7 +105,7 @@ function Navbar() {
                   to="/"
                   className="nav-links-mobile"
                   onClick={() => {
-                    logoutUser();
+                    closeUserMenu();
                     closeBurgerMenu();
                   }}
                 >
@@ -118,6 +118,7 @@ function Navbar() {
                   className="nav-links-mobile"
                   onClick={() => {
                     logoutUser();
+                    closeUserMenu();
                     closeBurgerMenu();
                   }}
                 >
@@ -149,7 +150,14 @@ function Navbar() {
             )}
             {token !== null && (
               <>
-                <button className="favorite-icon" aria-label="Favorites">
+                <button
+                  className="favorite-icon"
+                  onClick={() => {
+                    closeUserMenu();
+                    closeBurgerMenu();
+                  }}
+                  aria-label="Favorites"
+                >
                   <Favorite />
                 </button>
                 <button

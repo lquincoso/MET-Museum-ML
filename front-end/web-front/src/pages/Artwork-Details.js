@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as Star } from "../assets/star.svg";
 import "./Artwork-Details.css";
 
@@ -12,31 +12,32 @@ const ART_DETAILS = {
   culture: "Culture (if applicable)",
   medium: "Medium Used",
   about: "About the Artwork",
-  resources: "Resources for Further Reading"
+  resources: "Resources for Further Reading",
 };
 
-const TEMP_RATING = 3;
-
 function ArtworkDetails() {
+  const [selectedStar, setSelectedStar] = useState(null);
+
+  const handleStarClick = (starIndex) => {
+    setSelectedStar((prevStar) => (prevStar === starIndex ? null : starIndex));
+  };
+
   return (
     <div className="artwork-container">
       <div className="left-container">
         <div className="artwork-image"> {ART_DETAILS.image} </div>
         <div className="rating">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <Star
-              key={star}
-              size={32}
-              className={`${
-                star <= TEMP_RATING
-                  ? star === 2
-                    ? "stars"
-                    : star === 3
-                    ? "stars"
-                    : "stars"
-                  : "stars"
-              }`}
-            />
+          {[1, 2, 3, 4, 5].map((starNumber) => (
+            <button className="stars">
+              <Star
+                size={30}
+                onClick={() => handleStarClick(starNumber)}
+                className={`star ${
+                  selectedStar === starNumber ? "star-clicked" : "star-inactive"
+                }`}
+                style={{ "--star-color": `var(--star-color-${starNumber})` }}
+              />
+            </button>
           ))}
         </div>
       </div>
