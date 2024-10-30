@@ -12,7 +12,7 @@
   font-family: 'open sans', sans-serif;
 }
 
-.home, .tour, .sign-up, .login{
+.home, .tour, .sign-up, .login .artwork-details{
   display: flex;
   height: 90vh;
   align-items: center;
@@ -60,7 +60,6 @@
 
 
 .sign-up {
-  /* background-image: url('/images/img-8.jpg'); */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

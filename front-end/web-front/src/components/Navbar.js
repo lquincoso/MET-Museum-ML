@@ -102,7 +102,7 @@ function Navbar() {
               {/* navivate to fave */}
               <li className="nav-item mobile-only">
                 <Link
-                  to="/"
+                  to="/my-gallery"
                   className="nav-links-mobile"
                   onClick={() => {
                     closeUserMenu();
@@ -150,8 +150,9 @@ function Navbar() {
             )}
             {token !== null && (
               <>
-                <button
+                <Link
                   className="favorite-icon"
+                  to='/my-gallery'
                   onClick={() => {
                     closeUserMenu();
                     closeBurgerMenu();
@@ -159,7 +160,7 @@ function Navbar() {
                   aria-label="Favorites"
                 >
                   <Favorite />
-                </button>
+                </Link>
                 <button
                   className="user-icon"
                   onClick={() => {

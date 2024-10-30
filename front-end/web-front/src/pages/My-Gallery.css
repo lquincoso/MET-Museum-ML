@@ -1,0 +1,60 @@
+:root {
+  --star-color-1: #ff0000;
+  --star-color-2: #f8983e;
+  --star-color-3: #ffc107;
+  --star-color-4: #9bec50;
+  --star-color-5: #6dbb23;
+}
+
+
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 10px;
+  padding: 20px;
+}
+
+.gallery-rating {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.gallery-stars {
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  width: auto;
+}
+
+.gallery-star {
+  fill: var(--star-color);
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.gallery-star.gallery-star-clicked {
+  stroke: var(--secondary-color);
+  stroke-width: 4;
+  opacity: 1;
+}
+
+.gallery-star.gallery-star-clicked:hover {
+  opacity: 1;
+  stroke-width: 6;
+}
+
+.gallery-star.gallery-star-inactive {
+  opacity: 0.4;
+}
+
+.gallery-star.gallery-star-inactive:hover {
+  opacity: 0.9;
+  stroke: gray;
+  stroke-width: 3;
+}

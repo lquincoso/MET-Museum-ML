@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import SignUp from './pages/Sign-Up';
 import Login from './pages/Login';
 import ArtworkDetails from './pages/Artwork-Details';
+import MyGallery from './pages/My-Gallery';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path='/sign-up' element={<SignUp />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/artwork-details' element={<ArtworkDetails />}/>
+            <Route path='/my-gallery' element={<MyGallery />}/>
           </Routes>
         </AuthProvider>
       </Router>

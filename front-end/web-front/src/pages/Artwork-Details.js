@@ -23,17 +23,17 @@ function ArtworkDetails() {
   };
 
   return (
-    <div className="artwork-container">
+    <div className="artwork-details-container">
       <div className="left-container">
-        <div className="artwork-image"> {ART_DETAILS.image} </div>
-        <div className="rating">
+        <div className="details-artwork-image"> {ART_DETAILS.image} </div>
+        <div className="details-rating">
           {[1, 2, 3, 4, 5].map((starNumber) => (
-            <button className="stars">
+            <button className="details-stars">
               <Star
                 size={30}
                 onClick={() => handleStarClick(starNumber)}
-                className={`star ${
-                  selectedStar === starNumber ? "star-clicked" : "star-inactive"
+                className={`details-star ${
+                  selectedStar === starNumber ? "details-star-clicked" : "details-star-inactive"
                 }`}
                 style={{ "--star-color": `var(--star-color-${starNumber})` }}
               />

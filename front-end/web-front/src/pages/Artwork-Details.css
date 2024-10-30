@@ -6,13 +6,15 @@
   --star-color-5: #6dbb23;
 }
 
-.artwork-container {
-  height: calc(100vh - 60px);
+.artwork-details-container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: fixed;
+  z-index: 1;
 }
 
 .left-container,
@@ -22,52 +24,56 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
   margin: 0 30px;
   padding: 25px 0;
 }
 
-.artwork-image {
-  width: 100%;
-  height: 100%;
+.details-artwork-image {
+  width: auto;
+  height: 82%;
   background-color: rgb(223, 223, 238);
   object-fit: cover;
 }
 
-.rating {
+.details-rating {
+  width: 100%;
+  height: 8%;
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
+  align-content: center;
   margin-top: 15px;
 }
 
-.stars {
-  margin-right: 15px;
+.details-stars {
+  width: 70px;
+  height: auto;
   background-color: transparent;
   border: none;
+  margin-right: 10px;
 }
 
-.star {
+.details-star {
   fill: var(--star-color);
   cursor: pointer;
   transition: all 0.4s;
 }
 
-.star.star-clicked {
+.details-star.details-star-clicked {
   stroke: var(--secondary-color);
   stroke-width: 4;
   opacity: 1;
 }
 
-.star.star-clicked:hover {
+.details-star.details-star-clicked:hover {
   opacity: 1;
   stroke-width: 6;
 }
 
-.star.star-inactive {
+.details-star.details-star-inactive {
   opacity: 0.4;
 }
 
-.star.star-inactive:hover {
+.details-star.details-star-inactive:hover {
   opacity: 0.9;
   stroke: gray;
   stroke-width: 3;
