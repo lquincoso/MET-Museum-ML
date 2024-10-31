@@ -32,7 +32,14 @@
   width: auto;
   height: 82%;
   background-color: rgb(223, 223, 238);
+  border: 5px solid rgb(223, 223, 238);
   object-fit: cover;
+}
+
+.details-artwork-image img {
+  width: 100%;
+  height: 100%;
+  object-fit:contain;
 }
 
 .details-rating {
@@ -92,8 +99,43 @@
   font-size: 1.05rem;
   font-family: "open sans";
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: var(--secondary-color);
+}
+.details-related-education-buttons{
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 15px;
+  border-bottom: 1.5px solid var(--met-red);
+}
+
+.details-related-education-button{
+  background-color: transparent;
+  color: var(--met-red);
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding-bottom: 5px;
+  border: none;
+  cursor: pointer;
+  transition: ease-out 0.2s;
+  text-align: left;  
+  opacity: .7;
+}
+
+.details-related-education-button:hover{
+  opacity: 1;
+  font-weight: 700;
+  border-bottom: 4px solid var(--met-red);
+}
+
+.details-related-education-button-clicked{
+  opacity: 1;
+  font-weight: 650;
+  border-bottom: 2px solid var(--met-red);
 }
 
 .art-info-item {
@@ -123,4 +165,18 @@
   font-size: 1.15rem;
   font-weight: 500;
   margin-bottom: 10px;
+}
+
+
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error-container {
+  text-align: center;
+  padding: 2rem;
+  color: #dc3545;
 }

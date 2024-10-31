@@ -20,7 +20,7 @@ function App() {
             <Route path='/' element={<Home />}/>
             <Route path='/sign-up' element={<SignUp />}/>
             <Route path='/login' element={<Login />}/>
-            <Route path='/artwork-details' element={<ArtworkDetails />}/>
+            <Route path='/artwork/:id' element={<ArtworkDetails />}/>
             <Route path='/my-gallery' element={<MyGallery />}/>
           </Routes>
         </AuthProvider>
