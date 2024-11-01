@@ -74,9 +74,8 @@ const ArtworkDetails = () => {
         </div>
         <div className="details-rating">
           {[1, 2, 3, 4, 5].map((starNumber) => (
-            <button className="details-stars">
+            <button key={starNumber} className="details-stars">
               <Star
-                size={30}
                 onClick={() => handleStarClick(starNumber)}
                 className={`details-star ${
                   selectedStar === starNumber

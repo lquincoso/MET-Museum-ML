@@ -1,27 +1,28 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import PrivateRoute from './utils/PrivateRoute';
-import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import SignUp from './pages/Sign-Up';
-import Login from './pages/Login';
-import ArtworkDetails from './pages/Artwork-Details';
-import MyGallery from './pages/My-Gallery';
-
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import SignUp from "./pages/Sign-Up";
+import Login from "./pages/Login";
+import ArtSearch from "./pages/Art-Search";
+import ArtworkDetails from "./pages/Artwork-Details";
+import MyGallery from "./pages/My-Gallery";
 
 function App() {
   return (
     <>
       <Router>
         <AuthProvider>
-          <Navbar/>
+          <Navbar />
           <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/sign-up' element={<SignUp />}/>
-            <Route path='/login' element={<Login />}/>
-            <Route path='/artwork/:id' element={<ArtworkDetails />}/>
-            <Route path='/my-gallery' element={<MyGallery />}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/artwork/:id" element={<ArtworkDetails />} />
+            <Route path="/my-gallery" element={<MyGallery />} />
+            <Route path="/art-collection" element={<ArtSearch />} />
           </Routes>
         </AuthProvider>
       </Router>

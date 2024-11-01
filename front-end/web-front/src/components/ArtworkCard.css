@@ -10,7 +10,10 @@
   width: 300px;
   height: 400px;
   border-radius: var(--border-radius);
+  cursor: pointer;
 }
+
+
 
 .top-item {
   width: 100%;
@@ -32,8 +35,17 @@
 }
 
 .card-image {
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(223, 223, 238);
+  border: 5px solid rgb(223, 223, 238);
+  object-fit: cover;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit:contain;
 }
 
 .location-star {
@@ -66,12 +78,24 @@
   height: auto;
 }
 
+
 .artwork-card-title {
   margin: 10px 0;
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: 650;
   color: var(--secondary-color);
+  line-height: 1.2;
+  max-height: 2.4em; /* This allows for 2 lines at 1.2 line height */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Add a modifier class for long titles */
+.artwork-card-title.long-title {
+  font-size: 16px;
 }
 
 .artwork-card-artist {
