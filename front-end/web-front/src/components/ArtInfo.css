@@ -1,0 +1,22 @@
+.art-info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.art-info-label {
+  font-size: 1.2rem;
+  font-weight: 780;
+  margin-right: 8px;
+}
+
+.art-info-value {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.about-text {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}

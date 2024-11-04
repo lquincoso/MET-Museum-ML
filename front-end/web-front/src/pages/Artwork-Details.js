@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { ReactComponent as Star } from "../assets/star.svg";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import ArtInfo from "../components/ArtInfo";
+import RelatedArt from "../components/RelatedArt";
+import Education from "../components/Education";
 import "./Artwork-Details.css";
 
 const ArtworkDetails = () => {
@@ -33,10 +36,9 @@ const ArtworkDetails = () => {
           period: data.period || "Period unknown",
           culture: data.culture || "Culture unknown",
           medium: data.medium || "Medium unknown",
-          about: 
+          about:
             // fetch description from Wikipedia or other source
-            data.description ||
-            "No description available",
+            data.description || "No description available",
         });
       } catch (err) {
         setError(err.message);
@@ -128,31 +130,14 @@ const ArtworkDetails = () => {
         <div className="art-details-related-container">
           {activeTab === "details" ? (
             <div className="artwork-details">
-              <div className="artwork-info">
-                {[
-                  { label: "Artist", value: artwork.artist },
-                  { label: "Date", value: artwork.date },
-                  { label: "Period", value: artwork.period },
-                  { label: "Culture", value: artwork.culture },
-                  { label: "Medium", value: artwork.medium },
-                ].map(({ label, value }) => (
-                  <div key={label} className="art-info-item">
-                    <div className="art-info-label">{label}:</div>
-                    <div className="art-info-value">{value}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="about-container">
-                <div className="art-info-label">About: </div>
-                <div className="about-text">{artwork.about}</div>
-              </div>
+              <ArtInfo artwork={artwork} />
             </div>
           ) : activeTab === "related" ? (
             <div className="related-artwork">
-              Related artworks feature coming soon
+              <RelatedArt artwork={artwork} />
             </div>
           ) : (
-            <div className="artwork-education">educational content</div>
+            <div className="artwork-education"> <Education artwork={artwork}/></div>
           )}
         </div>
       </div>
