@@ -1,4 +1,0 @@
-PASSWORD=museumdtabseLocos9*
-USERNAME=root
-HOST=localhost
-DATABASE=image_interactions
