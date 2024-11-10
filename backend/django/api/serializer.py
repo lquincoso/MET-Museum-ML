@@ -1,4 +1,4 @@
-from api.models import User
+from api.models import User, ArtworkRating
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -15,7 +15,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
         
-        token['full_name'] = user.profile.first_name + ' ' + user.profile.last_name
         token['username'] = user.username
         token['email'] = user.email
         return token
@@ -64,3 +63,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 "error": str(e)
             })
+
+class ArtworkRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArtworkRating
+        fields = ['user', 'artwork_id', 'rating', 'created_at', 'updated_at']
+        read_only_fields = ['user', 'created_at', 'updated_at']

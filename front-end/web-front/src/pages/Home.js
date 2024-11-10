@@ -21,10 +21,10 @@ function Home() {
             </Button>
             <Button
               buttonStyle="btn--landing"
-              to="/education"
-              aria-label="Learn about the art"
+              to="/art-collection"
+              aria-label="Explore The Art"
             >
-              Learn About the Art
+              Explore The Art
             </Button>
           </div>
         </div>

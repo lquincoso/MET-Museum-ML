@@ -83,9 +83,9 @@ export const AuthProvider = ({ children }) => {
           password2,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.status === 201) {
         history("/login");
         // alert popup
@@ -100,7 +100,9 @@ export const AuthProvider = ({ children }) => {
         });
       } else {
         console.error("Registration failed:", data);
-        throw new Error(data.detail || Object.values(data)[0]?.[0] || "Registration failed");
+        throw new Error(
+          data.detail || Object.values(data)[0]?.[0] || "Registration failed"
+        );
       }
     } catch (error) {
       console.error("Registration error:", error);
@@ -133,6 +135,33 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const refreshToken = async () => {
+    const refresh = authTokens.refresh;
+    try {
+        const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ refresh }),
+        });
+        if (response.ok) {
+            const data = await response.json();
+            setAuthTokens((prevTokens) => ({
+                ...prevTokens,
+                access: data.access,
+            }));
+            return data.access; 
+        } else {
+            console.error("Failed to refresh token:", response.status);
+            alert("Session expired. Please log in again.");
+            logoutUser(); 
+        }
+    } catch (error) {
+        console.error("Error refreshing token:", error);
+    }
+  };
+
   const contextData = {
     user,
     setUser,
@@ -141,6 +170,7 @@ export const AuthProvider = ({ children }) => {
     registerUser,
     loginUser,
     logoutUser,
+    refreshToken,
   };
 
   useEffect(() => {
