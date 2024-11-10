@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/artwork/:id" element={<ArtworkDetails />} />
+            <Route path="/artwork/:artworkId" element={<ArtworkDetails />} />
             <Route path="/my-gallery" element={<MyGallery />} />
             <Route path="/art-collection" element={<ArtSearch />} />
           </Routes>

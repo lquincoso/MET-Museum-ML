@@ -1,3 +1,8 @@
-*.sqlite3
+.env
 node_modules/
-.cache/
+local_settings.py
+*.pyc
+__pycache__/
+.python-version
+.venv/
+db.sqlite3 

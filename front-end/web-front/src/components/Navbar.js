@@ -13,7 +13,6 @@ import "./Navbar.css";
 const NAV_ITEMS = [
   { to: "/tour", label: "Tour" },
   { to: "/art-collection", label: "Art Collection" },
-  { to: "/education", label: "Education" },
 ];
 
 function Navbar() {
@@ -30,14 +29,14 @@ function Navbar() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 960) {
-        setIsBurgerMenuOpen(false); // Reset burger menu when switching to desktop
+        setIsBurgerMenuOpen(false);
       }
       if (window.innerWidth > 768) {
-        setIsUserMenuOpen(false); // Reset user menu when switching to tablet
+        setIsUserMenuOpen(false);
       }
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
@@ -99,7 +98,6 @@ function Navbar() {
           )}
           {token !== null && (
             <>
-              {/* navivate to fave */}
               <li className="nav-item mobile-only">
                 <Link
                   to="/my-gallery"

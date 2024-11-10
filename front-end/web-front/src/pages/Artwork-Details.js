@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ReactComponent as Star } from "../assets/star.svg";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import ArtInfo from "../components/ArtInfo";
 import RelatedArt from "../components/RelatedArt";
@@ -8,19 +9,81 @@ import Education from "../components/Education";
 import "./Artwork-Details.css";
 
 const ArtworkDetails = () => {
-  const { id } = useParams();
+  const { artworkId } = useParams();
   const [artwork, setArtwork] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedStar, setSelectedStar] = useState(null);
+  const [currentRating, setCurrentRating] = useState(null);
   const [activeTab, setActiveTab] = useState("details");
+  const { authTokens, refreshToken } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchUserRating = async () => {
+      if (!authTokens?.access || !artworkId) return;
+
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/api/ratings/?artwork_id=${artworkId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${authTokens.access}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            // Token expired, try to refresh
+            const newToken = await refreshToken();
+            if (newToken) {
+              // Retry with new token
+              const retryResponse = await fetch(
+                `http://127.0.0.1:8000/api/ratings/?artwork_id=${artworkId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${newToken}`,
+                  },
+                }
+              );
+              if (retryResponse.ok) {
+                const data = await retryResponse.json();
+                handleRatingData(data);
+              }
+            }
+          }
+          throw new Error(`Failed to fetch rating: ${response.status}`);
+        }
+
+        const data = await response.json();
+        handleRatingData(data);
+      } catch (error) {
+        console.error("Error fetching user rating:", error);
+      }
+    };
+
+    const handleRatingData = (data) => {
+      if (Array.isArray(data) && data.length > 0) {
+        const userRating = data.find(
+          (rating) => rating.artwork_id === parseInt(artworkId)
+        );
+        if (userRating) {
+          setCurrentRating(userRating.rating);
+          setSelectedStar(userRating.rating);
+          console.log("User rating found:", userRating);
+        }
+      }
+    };
+
+    fetchUserRating();
+  }, [artworkId, authTokens, refreshToken]);
 
   useEffect(() => {
     const fetchArtworkDetails = async () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
+          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${artworkId}`
         );
         if (!response.ok) throw new Error("Artwork not found");
         const data = await response.json();
@@ -47,13 +110,64 @@ const ArtworkDetails = () => {
       }
     };
 
-    if (id) {
+    if (artworkId) {
       fetchArtworkDetails();
     }
-  }, [id]);
+  }, [artworkId]);
 
-  const handleStarClick = (starIndex) => {
-    setSelectedStar((prevStar) => (prevStar === starIndex ? null : starIndex));
+  const handleStarClick = async (rating) => {
+    if (!authTokens) {
+      alert("Please log in to rate artworks");
+      return;
+    }
+
+    try {
+      let token = authTokens.access;
+
+      // First attempt with current access token
+      let response = await fetch("http://127.0.0.1:8000/api/ratings/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ artwork_id: artworkId, rating }),
+      });
+
+      // If token is expired, try to refresh it
+      if (response.status === 401) {
+        console.log("Token expired, attempting to refresh...");
+        const newToken = await refreshToken();
+
+        if (newToken) {
+          // Retry the request with new token
+          response = await fetch("http://127.0.0.1:8000/api/ratings/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${newToken}`,
+            },
+            body: JSON.stringify({ artwork_id: artworkId, rating }),
+          });
+        } else {
+          throw new Error("Could not refresh token");
+        }
+      }
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Rating submitted successfully:", data);
+        setCurrentRating(rating);
+        setSelectedStar(rating);
+      } else {
+        throw new Error(`Failed to submit rating: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error submitting rating:", error);
+      alert(
+        "An error occurred while submitting the rating. Please try again later."
+      );
+    }
   };
 
   if (loading) {
@@ -80,7 +194,7 @@ const ArtworkDetails = () => {
               <Star
                 onClick={() => handleStarClick(starNumber)}
                 className={`details-star ${
-                  selectedStar === starNumber
+                  selectedStar === starNumber || currentRating === starNumber
                     ? "details-star-clicked"
                     : "details-star-inactive"
                 }`}
@@ -137,7 +251,10 @@ const ArtworkDetails = () => {
               <RelatedArt artwork={artwork} />
             </div>
           ) : (
-            <div className="artwork-education"> <Education artwork={artwork}/></div>
+            <div className="artwork-education">
+              {" "}
+              <Education artwork={artwork} />
+            </div>
           )}
         </div>
       </div>
