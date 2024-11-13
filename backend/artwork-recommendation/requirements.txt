@@ -1,0 +1,11 @@
+Flask
+torch
+torchvision
+Pillow
+requests
+numpy
+scikit-learn
+joblib
+faiss-cpu
+diskcache
+aiohttp
