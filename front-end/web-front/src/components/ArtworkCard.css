@@ -20,6 +20,7 @@
   height: 50%;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   background-color: #737272;
+  overflow: hidden;
 }
 
 .bottom-item {
