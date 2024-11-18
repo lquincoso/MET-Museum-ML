@@ -25,11 +25,35 @@ function RelatedArt({ artworkId }) {
     }));
   }, []);
 
-  // function to fetch related art (this needs to be modified)
+  // function to fetch related art from the backend
   const fetchRelatedArt = useCallback(async () => {
     try {
       setLoading(true);
-      const objectIds = [10, 45, 78, 505, 1000, 400]; // hardcoded object ids for testing
+      setError(null);
+
+      // Making a request to the backend to get related artwork IDs
+      const response = await fetch("http://127.0.0.1:5000/recommend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ artwork_id: artworkId }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch similar artworks from backend");
+      }
+
+      const data = await response.json();
+      const objectIds = data.similar_artworks;
+
+      if (objectIds.length === 0) {
+        setError("No similar artworks found.");
+        setArtworks([]);
+        return;
+      }
+
+      // Fetch artwork details from the Met API
       const artworkDetails = await fetchArtworkDetails(objectIds);
       setArtworks(artworkDetails);
     } catch (err) {
@@ -38,7 +62,7 @@ function RelatedArt({ artworkId }) {
     } finally {
       setLoading(false);
     }
-  }, [fetchArtworkDetails]);
+  }, [fetchArtworkDetails, artworkId]);
 
   useEffect(() => {
     fetchRelatedArt();
