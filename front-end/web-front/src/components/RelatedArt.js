@@ -53,7 +53,7 @@ function RelatedArt({ artworkId }) {
         return;
       }
 
-      // Fetch artwork details from the Met API
+      // Fetching artwork details from the Met API
       const artworkDetails = await fetchArtworkDetails(objectIds);
       setArtworks(artworkDetails);
     } catch (err) {
