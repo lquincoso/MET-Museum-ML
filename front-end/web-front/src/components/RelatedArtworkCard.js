@@ -1,10 +1,8 @@
 import "./ArtworkCards.css";
-import { ReactComponent as LocationPin } from "../assets/location_pin.svg";
-import { ReactComponent as Star } from "../assets/star.svg";
 
 import React, { useEffect, useRef, useState } from "react";
 
-const ArtworkCard = ({ artwork, rating }) => {
+const ArtworkCard = ({ artwork }) => {
   const titleRef = useRef(null);
   const [isLongTitle, setIsLongTitle] = useState(false);
 
@@ -25,7 +23,7 @@ const ArtworkCard = ({ artwork, rating }) => {
   }, [artwork.title]);
 
   return (
-    <div className="art-card-container">
+    <div className="related-art-card-container">
       <div className="top-item">
         <div className="card-image">
           <img
@@ -34,21 +32,14 @@ const ArtworkCard = ({ artwork, rating }) => {
           />
         </div>
       </div>
-      <div className="bottom-item">
-        <div className="location-star">
-          <div className="location">
-            <LocationPin className="location-pin" />
-            <span> {artwork.location}</span>
-          </div>
-          <Star className="card-star" />
-        </div>
+      <div className="related-bottom-item">
         <h3 
           ref={titleRef}
-          className={`artwork-card-title ${isLongTitle ? 'long-title' : ''}`}
+          className={`related-artwork-card-title ${isLongTitle ? 'related-long-title' : ''}`}
         >
           {artwork.title}
         </h3>
-        <p className="artwork-card-artist">{artwork.artist}</p>
+        <p className="related-artwork-card-artist">{artwork.artist}</p>
       </div>
     </div>
   );
