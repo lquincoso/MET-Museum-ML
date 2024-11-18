@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import RelatedArtworkCard from "../components/RelatedArtworkCard";
 
-function RelatedArt({ artwork }) {
+function RelatedArt({ artworkId }) {
   const navigate = useNavigate();
   const [artworks, setArtworks] = useState([]);
   const [loading, setLoading] = useState(true);
