@@ -65,8 +65,14 @@ function RelatedArt({ artworkId }) {
   }, [fetchArtworkDetails, artworkId]);
 
   useEffect(() => {
-    fetchRelatedArt();
-  }, [fetchRelatedArt]);
+    if (artworkId) {
+      console.log("Artwork ID in RelatedArt:", artworkId);
+      fetchRelatedArt();
+    } else {
+      console.error("Artwork ID is undefined in RelatedArt");
+    }
+  }, [fetchRelatedArt, artworkId]);
+  
 
   // no need to modify this anything below
   if (loading) {
