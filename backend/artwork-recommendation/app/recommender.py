@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Loading Model at Server Startup
-MODEL_PATH = 'app/models/resnet50_model.pth'
+MODEL_PATH = 'backend/artwork-recommendation/app/models/resnet50_model.pth'
 model = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V1)
 model = torch.nn.Sequential(*list(model.children())[:-1])
 
@@ -63,7 +63,7 @@ def group_artworks_by_metadata(artwork_ids):
     return grouped_artworks
 
 # Loading Cached Feature Vectors if Available
-CACHE_PATH = 'app/data/cache.pkl'
+CACHE_PATH = 'backend/artwork-recommendation/app/data/cache.pkl'
 if os.path.exists(CACHE_PATH):
     with open(CACHE_PATH, 'rb') as f:
         cache = pickle.load(f)
@@ -104,7 +104,7 @@ def preprocess_grouped_artworks(grouped_artworks):
                     logger.error(f"Error fetching image for artwork ID {artwork_id}: {e}")
 
 # Grouping artworks before Processing stage
-all_artwork_ids = [artwork_id for artwork_id in range(1, 1000)]
+all_artwork_ids = [artwork_id for artwork_id in range(1, 2000)]
 logger.info("Grouping artworks by metadata...")
 grouped_artworks = group_artworks_by_metadata(all_artwork_ids)
 logger.info("Preprocessing grouped artworks...")
