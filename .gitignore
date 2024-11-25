@@ -7,3 +7,4 @@ __pycache__/
 .venv/
 db.sqlite3 
 .pytest_cache
+.idea
