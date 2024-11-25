@@ -10,8 +10,7 @@ Insert relevant documentation pertinent to the recommendation system.
 
 
 ## How to run he unit test.
-In the root directory (MET-MUSEUM-ML), type:
-- pytest
-Give up to 20 minutes for all tests to run.
+In the root directory (MET-MUSEUM-ML), type: "pytest"
+Give up to 1 hour for all tests to run.
 
 
