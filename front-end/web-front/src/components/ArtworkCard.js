@@ -1,7 +1,6 @@
 import "./ArtworkCards.css";
 import { ReactComponent as LocationPin } from "../assets/location_pin.svg";
 import { ReactComponent as Star } from "../assets/star.svg";
-
 import React, { useEffect, useRef, useState } from "react";
 
 const ArtworkCard = ({ artwork, rating }) => {
@@ -12,7 +11,6 @@ const ArtworkCard = ({ artwork, rating }) => {
     const checkTitleLength = () => {
       const titleElement = titleRef.current;
       if (titleElement) {
-        // Check if the content height is greater than two lines
         const lineHeight = parseInt(window.getComputedStyle(titleElement).lineHeight);
         const maxHeight = lineHeight * 2;
         setIsLongTitle(titleElement.scrollHeight > maxHeight);
@@ -23,6 +21,12 @@ const ArtworkCard = ({ artwork, rating }) => {
     window.addEventListener('resize', checkTitleLength);
     return () => window.removeEventListener('resize', checkTitleLength);
   }, [artwork.title]);
+
+  // Get the appropriate star color based on rating
+  const getStarColor = () => {
+    if (!rating) return 'rgba(0, 0, 0, 0.4)'; 
+    return `var(--star-color-${rating})`; 
+  };
 
   return (
     <div className="art-card-container">
@@ -38,9 +42,15 @@ const ArtworkCard = ({ artwork, rating }) => {
         <div className="location-star">
           <div className="location">
             <LocationPin className="location-pin" />
-            <span> {artwork.location}</span>
+            <span>{artwork.location}</span>
           </div>
-          <Star className="card-star" />
+          <Star 
+            className="card-star" 
+            style={{ 
+              fill: getStarColor(),
+              opacity: rating ? 1 : 0.4
+            }} 
+          />
         </div>
         <h3 
           ref={titleRef}

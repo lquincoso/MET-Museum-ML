@@ -2,6 +2,11 @@
   --primary-color: #fff;
   --met-red: #E4002B;
   --secondary-color: #000;
+  --star-color-1: #ff0000;
+  --star-color-2: #f8983e;
+  --star-color-3: #ffc107;
+  --star-color-4: #9bec50;
+  --star-color-5: #6dbb23;
   
 }
 
@@ -9,7 +14,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'open sans', sans-serif;
+  font-family: 'Open Sans', 'Playfair Display';
 }
 
 .home, .tour, .sign-up, .login .artwork-details{
