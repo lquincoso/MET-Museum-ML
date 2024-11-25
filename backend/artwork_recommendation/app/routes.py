@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from backend.artwork_recommendation.app.recommender import recommend_artworks
-from backend.artwork_recommendation.app.met_api import search_artworks, get_artwork_by_id
+from app.recommender import recommend_artworks
+from app.met_api import search_artworks, get_artwork_by_id
 import asyncio
 import logging
 

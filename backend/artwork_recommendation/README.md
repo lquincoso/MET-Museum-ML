@@ -4,9 +4,10 @@ Insert relevant documentation pertinent to the recommendation system.
 
 ## How to run the backend:
 
-- Install dependencies. Use "pip install -r requirements.txt"
-- Setup the python environment: $env:PYTHONPATH = "path-to-your-local-directory\MET-Museum-ML".
-- Then: "python backend/artwork_recommendation/run.py"
+- Install dependencies by doing: "poetry install".
+- Activate environment by doing: "poetry shell".
+- Run the program by doing: "poetry run python run.py"
+
 
 ## How to run he unit test.
 In the root directory (MET-MUSEUM-ML), type:
