@@ -1,4 +1,4 @@
-# ArtLens: MET Insights - Providing insights into the MET Museum's art collection, a nice blend of exploration and analysis.
+# ArtLens: MET Insights - Providing insights into the MET Museum's art collection.
 
 A web and ios application that provides an interactive online experience of the Metropolitan Museum of Art through their public API.
 
