@@ -10,6 +10,7 @@ import ArtSearch from "./pages/Art-Search";
 import ArtworkDetails from "./pages/Artwork-Details";
 import MyGallery from "./pages/My-Gallery";
 import Tour from "./pages/Tour";
+import 'leaflet/dist/leaflet.css';
 function App() {
   return (
     <>

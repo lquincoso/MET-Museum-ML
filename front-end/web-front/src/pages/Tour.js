@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import axios from 'axios';
 import GalleryMap from '../components/GalleryMap'; 
 import './Tour.css';
@@ -35,17 +35,6 @@ function Tour() {
                 <input type="text" value={end} onChange={(e) => setEnd(e.target.value)} />
             </div>
             <button className="find-path-button" onClick={handleTourSubmit}>Find Shortest Path</button>
-            
-            {path.length > 0 && (
-                <div className="path-result">
-                    <h2>Shortest Path:</h2>
-                    <ul>
-                        {path.map((galleryId, index) => (
-                            <li key={index}>{galleryId}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
 
             <div className="map-section">
                 <h2>Gallery Map</h2>
