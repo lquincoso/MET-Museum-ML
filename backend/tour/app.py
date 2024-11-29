@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import json
 from pathfinding import astar
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 # Load gallery data from file
 current_dir = os.path.dirname(__file__)
