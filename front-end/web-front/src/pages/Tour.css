@@ -1,0 +1,76 @@
+/* Tour.css */
+.tour-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #d6001c; /* The MET branding color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #b80018;
+}
+
+.path-result {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.path-result ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.path-result li {
+    background: #f0f0f0;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.map-section {
+    margin-top: 40px;
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    max-width: 800px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
