@@ -16,7 +16,7 @@ L.Icon.Default.mergeOptions({
 function MapRefresher() {
   const map = useMap();
   useEffect(() => {
-    map.invalidateSize(); // Ensure the map knows its dimensions and refreshes tiles
+    map.invalidateSize();
   }, [map]);
   return null;
 }

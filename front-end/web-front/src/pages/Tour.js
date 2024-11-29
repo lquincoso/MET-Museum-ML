@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import GalleryMap from '../components/GalleryMap'; // Assuming it's in the components folder
+import GalleryMap from '../components/GalleryMap'; 
 import './Tour.css';
 
 function Tour() {
