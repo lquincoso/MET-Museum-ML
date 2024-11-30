@@ -27,7 +27,7 @@
     text-align: center;
 }
 
-button {
+.tour-container button {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #d6001c;
@@ -38,7 +38,7 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+.tour-container button:hover {
     background-color: #b80018;
 }
 

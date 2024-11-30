@@ -1,6 +1,6 @@
 .art-search {
-  padding: 20px;
-  max-width: 1200px;
+  padding: 15px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .search-filter {
-  width: 250px;
+  width: 180px;
   flex-shrink: 0;
 }
 
@@ -63,7 +63,7 @@
 .artwork-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 30px;
   margin-bottom: 30px;
 }
 
