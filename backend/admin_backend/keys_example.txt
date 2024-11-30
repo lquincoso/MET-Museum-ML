@@ -1,0 +1,4 @@
+PASSWORD=yourpasswordhere
+USERNAME=root
+HOST=localhost
+DATABASE=met_appreciation
