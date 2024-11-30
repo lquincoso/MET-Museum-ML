@@ -11,13 +11,14 @@
 }
 .gallery-heading {
   align-self: start;
-  font-family: "Open Sans";
+  font-family: "Playfair Display";
   font-weight: 700;
+  color: var(--secondary-color);
 }
 .gallery-rating {
   width: 100%;
   height: 80px;
-  border-top: 1px solid var(--met-red);
+  border-top: 1px solid var(--secondary-color);
   display: flex;
   justify-content: flex-start;
   align-content: center;
