@@ -56,6 +56,7 @@ This project creates an immersive digital platform for exploring the Metropolita
    ```bash
    cd backend/Django
    poetry shell
+   poetry intall
    python manage.py runserver
    ```
    The backend server will start at `http://localhost:8000`
