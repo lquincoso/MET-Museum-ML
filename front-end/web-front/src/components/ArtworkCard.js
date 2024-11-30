@@ -1,4 +1,4 @@
-import "./ArtworkCard.css";
+import "./ArtworkCards.css";
 import { ReactComponent as LocationPin } from "../assets/location_pin.svg";
 import { ReactComponent as Star } from "../assets/star.svg";
 import React, { useEffect, useRef, useState } from "react";

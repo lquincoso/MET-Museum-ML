@@ -118,8 +118,8 @@ const ArtSearch = () => {
   return (
     <div className="art-search">
       <div className="search-bar">
+        <h1 className="search-heading">Search The Collection</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="search">Search for Art</label>
           <input
             type="text"
             id="search"
@@ -164,18 +164,18 @@ const ArtSearch = () => {
                 <button
                   onClick={() => setCurrentPage(1)}
                   disabled={currentPage === 1 || loading}
-                  className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                  className="jump-page-buttons"
                 >
-                  First
+                  &lt;&lt;
                 </button>
 
                 {/* Previous page button */}
                 <button
                   onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1 || loading}
-                  className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                  className="jump-page-buttons"
                 >
-                  Previous
+                  &lt;
                 </button>
 
                 {/* Page numbers */}
@@ -185,10 +185,10 @@ const ArtSearch = () => {
                       key={pageNum}
                       onClick={() => setCurrentPage(pageNum)}
                       disabled={loading}
-                      className={`px-3 py-2 rounded-md ${
+                      className={`page-number ${
                         currentPage === pageNum
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-100 hover:bg-gray-200"
+                          ? "page-number-active"
+                          : "page-number-inactive"
                       }`}
                     >
                       {pageNum}
@@ -202,23 +202,19 @@ const ArtSearch = () => {
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                   }
                   disabled={currentPage === totalPages || loading}
-                  className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                  className="jump-page-buttons"
                 >
-                  Next
+                  &gt;
                 </button>
 
                 {/* Last page button */}
                 <button
                   onClick={() => setCurrentPage(totalPages)}
                   disabled={currentPage === totalPages || loading}
-                  className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                  className="jump-page-buttons"
                 >
-                  Last
+                  &gt;&gt;
                 </button>
-
-                <span>
-                  Page {currentPage} of {totalPages}
-                </span>
               </div>
             </>
           )}

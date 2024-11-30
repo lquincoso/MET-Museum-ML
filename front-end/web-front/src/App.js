@@ -9,7 +9,8 @@ import Login from "./pages/Login";
 import ArtSearch from "./pages/Art-Search";
 import ArtworkDetails from "./pages/Artwork-Details";
 import MyGallery from "./pages/My-Gallery";
-
+import Tour from "./pages/Tour";
+import 'leaflet/dist/leaflet.css';
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
             <Route path="/artwork/:artworkId" element={<ArtworkDetails />} />
             <Route path="/my-gallery" element={<MyGallery />} />
             <Route path="/art-collection" element={<ArtSearch />} />
+            <Route path="/tour" element={<Tour />} />
           </Routes>
         </AuthProvider>
       </Router>

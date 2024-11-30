@@ -1,0 +1,11 @@
+.details-rating{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.related-cards{
+    background-color: transparent;
+    border-color: transparent;
+}
