@@ -1,0 +1,5 @@
+pymysql
+streamlit
+pandas
+requests
+matplotlib
