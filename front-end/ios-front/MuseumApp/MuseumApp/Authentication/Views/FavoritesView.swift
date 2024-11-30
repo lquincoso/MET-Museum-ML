@@ -19,8 +19,8 @@ struct FavoritesView: View {
     }
     
     var body: some View {
-        NavigationStack {  // Changed from NavigationView
-            VStack {  // Added VStack
+        NavigationStack {
+            VStack {
                 if favoriteArtworks.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "heart.slash")

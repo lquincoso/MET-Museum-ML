@@ -13,10 +13,8 @@ class UserArtworkViewModel: ObservableObject {
     
     func toggleFavorite(artworkId: Int, userId: String) {
         if let index = userArtworks.firstIndex(where: { $0.artworkId == artworkId }) {
-            // Update existing
             userArtworks[index].isFavorite.toggle()
         } else {
-            // Create new
             let userArtwork = UserArtwork(artworkId: artworkId, userId: userId, isFavorite: true)
             userArtworks.append(userArtwork)
         }
@@ -25,10 +23,8 @@ class UserArtworkViewModel: ObservableObject {
     
     func updateRating(artworkId: Int, userId: String, rating: Int) {
         if let index = userArtworks.firstIndex(where: { $0.artworkId == artworkId }) {
-            // Update existing
             userArtworks[index].rating = rating
         } else {
-            // Create new
             let userArtwork = UserArtwork(artworkId: artworkId, userId: userId, rating: rating)
             userArtworks.append(userArtwork)
         }

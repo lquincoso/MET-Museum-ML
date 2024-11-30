@@ -24,7 +24,6 @@ class AuthViewModel: ObservableObject {
         
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         
-        // For demo purposes, basic validation
         if email.isEmpty || password.isEmpty {
             errorMessage = "Please fill in all fields"
             isLoading = false
@@ -33,7 +32,6 @@ class AuthViewModel: ObservableObject {
         
         // TODO: Replace with actual API call
         if email.contains("@") && password.count >= 6 {
-            // No need for DispatchQueue.main.async because of @MainActor
             self.user = User(email: email, username: email.split(separator: "@").first?.description ?? "")
             self.isAuthenticated = true
             self.isLoading = false
@@ -48,7 +46,6 @@ class AuthViewModel: ObservableObject {
         
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         
-        // Validation
         if email.isEmpty || password.isEmpty || confirmPassword.isEmpty {
             errorMessage = "Please fill in all fields"
             isLoading = false
