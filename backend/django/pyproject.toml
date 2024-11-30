@@ -16,6 +16,8 @@ pyjwt = "^2.9.0"
 python-dotenv = "^1.0.1"
 django-mysql = "^4.15.0"
 pymysql = "^1.1.1"
+django-jazzmin = "^3.0.1"
+cryptography = "^44.0.0"
 
 
 [build-system]
