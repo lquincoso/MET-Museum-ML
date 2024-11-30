@@ -1,8 +1,13 @@
+import subprocess
+import threading
+import requests
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import IntegrityError
 from api.models import User, ArtworkRating
 from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, ArtworkRatingSerializer
+
+from django.contrib.admin.views.decorators import staff_member_required
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -54,6 +59,18 @@ class ArtworkRatingViewSet(viewsets.ModelViewSet):
                 {'error': str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+@staff_member_required
+def streamlit_dashboard(request):
+    try:
+        requests.get('http://localhost:8501', timeout=10)
+    except requests.ConnectionError:
+        def start_streamlit():
+            subprocess.run(['streamlit', 'run', 'backend/admin_dashboard.py']) #adjust if not found
+        
+        threading.Thread(target=start_streamlit, daemon=True).start()
+    
+    return render(request, 'admin/streamlit_dashboard.html')
 
 @api_view(['GET'])
 def getRoutes(request):

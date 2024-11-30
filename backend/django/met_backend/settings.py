@@ -57,7 +57,7 @@ ROOT_URLCONF = 'met_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # For streamlit dashboard
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
