@@ -16,11 +16,11 @@
 .related-art-card-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin: 10px;
   width: 150px;
-  height: 200px;
+  height: 190px;
   border-radius: var(--border-radius);
   cursor: pointer;
 }
@@ -28,7 +28,7 @@
 
 .top-item {
   width: 100%;
-  height: 50%;
+  height: 65%;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   background-color: #737272;
   overflow: hidden;
@@ -52,10 +52,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-  height: 50%;
+  height: 35%;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   background-color: var(--met-red);
-  padding: 20px;
+  padding: 5px;
 }
 
 .card-image {
@@ -106,10 +106,11 @@
 .artwork-card-title {
   margin: 5px 0;
   font-family: 'Open Sans', sans-serif;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 650;
+  text-align: justify; 
   color: var(--secondary-color);
-  line-height: .6;
+  line-height: 1.2em;
   max-height: 1.2em; 
   overflow: hidden;
   display: -webkit-box;
@@ -118,10 +119,11 @@
 }
 
 .related-artwork-card-title {
-  margin: 10px 0;
+  margin: 5px 0;
   font-family: 'Open Sans', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 650;
+  text-align: justify;
   color: var(--secondary-color);
   line-height: 1.2;
   max-height: 2.4em; 
@@ -131,13 +133,12 @@
   -webkit-box-orient: vertical;
 }
 
-/* Add a modifier class for long titles */
 .artwork-card-title.long-title {
   font-size: 16px;
 }
 
 .related-artwork-card-title.long-title {
-  font-size: 8px;
+  font-size: 10px;
 }
 
 .artwork-card-artist {
@@ -149,7 +150,7 @@
 
 .related-artwork-card-artist {
   font-family: 'Open Sans', sans-serif;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--primary-color);
 }

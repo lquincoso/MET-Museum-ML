@@ -1,11 +1,13 @@
 .details-rating{
+    width: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 5px;
 }
 
 .related-cards{
     background-color: transparent;
     border-color: transparent;
+;
 }
