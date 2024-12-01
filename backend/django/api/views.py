@@ -1,6 +1,8 @@
 import subprocess
 import threading
 import requests
+from django.contrib.auth.decorators import user_passes_test
+
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import IntegrityError
@@ -60,17 +62,17 @@ class ArtworkRatingViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-@staff_member_required
+@user_passes_test(lambda u: u.is_superuser)
 def streamlit_dashboard(request):
     try:
         requests.get('http://localhost:8501', timeout=10)
     except requests.ConnectionError:
         def start_streamlit():
-            subprocess.run(['streamlit', 'run', 'backend/admin_dashboard.py']) #adjust if not found
+            subprocess.run(['streamlit', 'run', 'backend/admin_dashboard.py'])  # Adjust if the path is different
         
         threading.Thread(target=start_streamlit, daemon=True).start()
     
-    return render(request, 'admin/streamlit_dashboard.html')
+    return render(request, 'streamlit_dashboard.html')
 
 @api_view(['GET'])
 def getRoutes(request):

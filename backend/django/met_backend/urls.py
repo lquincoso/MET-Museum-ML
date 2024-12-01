@@ -21,12 +21,13 @@ from django.urls import path
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import streamlit_dashboard
+from api.admin import streamlit_admin_site 
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include("api.urls")),
-    path('admin/streamlit-dashboard/', streamlit_dashboard, name='streamlit_dashboard'),
+    path('streamlit-admin/', streamlit_admin_site.urls),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
