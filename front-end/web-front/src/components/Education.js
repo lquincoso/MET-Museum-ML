@@ -7,10 +7,10 @@ function Education({ artwork }) {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [chatGptResponse, setChatGptResponse] = useState("");
+  const [geminiResponse, setGeminiResponse] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
 
-  // Function to fetch Google Books data
+  // Function to GET Google Books data
   const fetchGoogleBooks = async (query) => {
     try {
       const response = await fetch(
@@ -31,7 +31,7 @@ function Education({ artwork }) {
     }
   };
 
-  // Function to fetch Project Gutenberg data
+  // Function to GET Project Gutenberg data
   const fetchGutenbergBooks = async (query) => {
     try {
       const response = await fetch(
@@ -52,23 +52,28 @@ function Education({ artwork }) {
     }
   };
 
-  // Function to fetch ChatGPT response
-  const fetchChatGPT = async (query) => {
+  // Function to GET response from Google Gemini
+  const fetchGemini = async (query) => {
     try {
       setChatLoading(true);
-      const response = await axios.post("http://127.0.0.1:5000/api/chatgpt", {
-        prompt: query,
-      });
-      setChatGptResponse(response.data.response || "No insights available");
+      // Send the prompt to your backend server to get the response from Gemini
+      const response = await axios.post(
+        "http://127.0.0.1:5001/api/gemini",
+        { prompt: query },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      setGeminiResponse(response.data.response || "No insights available.");
     } catch (error) {
-      console.error("Error fetching ChatGPT response:", error);
-      setChatGptResponse("An error occurred while fetching ChatGPT data.");
+      console.error("Error details:", error.response?.data || error.message);
+      setGeminiResponse("An error occurred while fetching Gemini data.");
     } finally {
       setChatLoading(false);
     }
   };
 
-  // Main function to fetch all data
+  // Main function
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -86,7 +91,7 @@ function Education({ artwork }) {
         return;
       }
 
-      // Fetch data from various sources
+      // GET data from Wikipedia and Britannica
       const wikipediaResponse = await fetch(
         `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
           query
@@ -115,8 +120,8 @@ function Education({ artwork }) {
 
       setBooks([...googleBooks, ...gutenbergBooks]);
 
-      // Fetch ChatGPT response
-      fetchChatGPT(query);
+      // GET Gemini response
+      fetchGemini(query);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -138,7 +143,7 @@ function Education({ artwork }) {
 
   return (
     <div className="education-container">
-      {/* Articles Section */}
+      {/* Articles */}
       <div className="education-section">
         <h3>Articles related to "{artwork.title || "This Artwork"}"</h3>
         <div className="education-grid">
@@ -160,7 +165,7 @@ function Education({ artwork }) {
         </div>
       </div>
 
-      {/* Books Section */}
+      {/* Books */}
       <div className="education-section">
         <h3>Books related to "{artwork.title || "This Artwork"}"</h3>
         <div className="education-grid">
@@ -182,15 +187,15 @@ function Education({ artwork }) {
         </div>
       </div>
 
-      {/* ChatGPT Section */}
+      {/* Gemini */}
       <div className="education-section">
-        <h3>Insights from ChatGPT</h3>
+        <h3>Insights from Gemini</h3>
         {chatLoading ? (
-          <div className="education-loading">Loading ChatGPT insights...</div>
+          <div className="education-loading">Loading Gemini insights...</div>
         ) : (
-          <div className="education-card">
+          <div className="education-card education-gemini-content">
             <div className="education-content">
-              <p>{chatGptResponse}</p>
+              <p>{geminiResponse}</p>
             </div>
           </div>
         )}
