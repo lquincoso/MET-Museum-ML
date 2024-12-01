@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import { Button } from "./Button";
-import { ReactComponent as Logo } from "../assets/theMet.svg";
+import { ReactComponent as Logo } from "../assets/artlenslogo1.svg";
 import { ReactComponent as Close } from "../assets/close.svg";
 import { ReactComponent as Menu } from "../assets/menu.svg";
 import { ReactComponent as Favorite } from "../assets/favorite.svg";
