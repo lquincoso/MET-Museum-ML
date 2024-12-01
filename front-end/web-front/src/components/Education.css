@@ -4,9 +4,9 @@
     border-radius: 8px;
     max-width: 1200px;
     margin: 0 auto;
-    overflow: auto; /* Allows scrolling if content exceeds container size */
-    max-height: 52vh; /* Ensures the container doesn’t exceed the viewport height */
-    box-sizing: border-box; /* Ensures padding is included in width/height calculations */
+    overflow: auto; 
+    max-height: 52vh; 
+    box-sizing: border-box; 
   }
 
   .education-container h2 {
@@ -74,4 +74,11 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
+  
+  .education-gemini-content p {
+    overflow: visible; 
+    display: block;
+    -webkit-line-clamp: none;
+  }
+  
   
