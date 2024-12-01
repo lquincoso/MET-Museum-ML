@@ -8,19 +8,22 @@ import numpy as np
 import faiss
 from PIL import Image
 from sklearn.metrics.pairwise import cosine_similarity
-from app.met_api import get_artwork_by_id
-import os
 import asyncio
 import aiohttp
 from concurrent.futures import ThreadPoolExecutor
 import logging
+
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from artwork_recommendation.app.met_api import get_artwork_by_id
 
 # Logging config
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Loading Model at Server Startup
-MODEL_PATH = 'app/models/resnet50_model.pth'
+MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'models', 'resnet50_model.pth'))
 model = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V1)
 model = torch.nn.Sequential(*list(model.children())[:-1])
 
@@ -63,19 +66,17 @@ def group_artworks_by_metadata(artwork_ids):
     return grouped_artworks
 
 # Loading Cached Feature Vectors if Available
-CACHE_DIR = 'app/data/'
-CACHE_PATH = os.path.join(CACHE_DIR, 'cache.pkl')
-
-# Ensure that the cache directory exists
-if not os.path.exists(CACHE_DIR):
-    os.makedirs(CACHE_DIR)
+CACHE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'data', 'cache.pkl'))
+logger.info(f"Looking for cache file at: {CACHE_PATH}")
 
 # Loading Cached Feature Vectors if Available
 if os.path.exists(CACHE_PATH):
     with open(CACHE_PATH, 'rb') as f:
         cache = pickle.load(f)
+        logger.info("Cache file found and loaded.")
 else:
     cache = {}
+    logger.info("Cache file not found, starting with empty cache.")
 
 # Preparing FAISS Index if Cached Features Exist
 artwork_ids = list(cache.keys())
