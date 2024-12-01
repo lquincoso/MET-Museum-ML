@@ -248,12 +248,12 @@ const ArtworkDetails = () => {
             </div>
           ) : activeTab === "related" ? (
             <div className="related-artwork">
-              <RelatedArt artworkId={artworkId} />
+              <RelatedArt artworkId={artwork} />
             </div>
           ) : (
             <div className="artwork-education">
               {" "}
-              <Education artwork={artworkId} />
+              <Education artwork={artwork} />
             </div>
           )}
         </div>

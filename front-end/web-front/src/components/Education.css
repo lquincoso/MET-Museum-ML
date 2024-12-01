@@ -1,12 +1,14 @@
-.education-container {
+  .education-container {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     max-width: 1200px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: auto; /* Allows scrolling if content exceeds container size */
+    max-height: 52vh; /* Ensures the container doesn’t exceed the viewport height */
+    box-sizing: border-box; /* Ensures padding is included in width/height calculations */
   }
-  
+
   .education-container h2 {
     text-align: left;
     margin-bottom: 20px;
