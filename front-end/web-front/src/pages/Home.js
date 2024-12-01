@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import "./Home.css";
 import { Button } from "../components/Button";
-import { ReactComponent as Logo } from "../assets/theMet.svg";
+import { ReactComponent as Logo } from "../assets/artlenslogo2.svg";
 
 function Home() {
   return (
