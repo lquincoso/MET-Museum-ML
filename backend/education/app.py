@@ -1,34 +1,30 @@
 from flask import Flask, request, jsonify
-import openai
+import google.generativeai as genai
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
 
-openai.api_key = "OPEN-AI-KEY"
+api_key = os.getenv('GENAI_API_KEY')
 
-@app.route("/api/chatgpt", methods=["POST"])
-def chatgpt():
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+@app.route("/api/gemini", methods=["POST"])
+def generate_response():
     try:
-        data = request.json
+        data = request.get_json()
         prompt = data.get("prompt", "").strip()
-        
+
         if not prompt:
             return jsonify({"error": "Prompt is required"}), 400
 
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=150,
-            temperature=0.7,
-        )
+        response = model.generate_content(prompt)
 
-        chatgpt_response = response.choices[0].message["content"].strip()
-        return jsonify({"response": chatgpt_response}), 200
+        return jsonify({"response": response.text})
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
