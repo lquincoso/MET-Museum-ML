@@ -6,7 +6,8 @@ import "./Art-Search.css";
 
 const ArtSearch = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [inputValue, setInputValue] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState(""); 
   const [artworks, setArtworks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -70,23 +71,13 @@ const ArtSearch = () => {
   );
 
   useEffect(() => {
-    fetchArtworks();
-  }, [fetchArtworks]);
-
-  useEffect(() => {
-    if (searchQuery) {
-      setCurrentPage(1);
-      fetchArtworks(searchQuery);
-    }
-  }, [searchQuery, fetchArtworks]);
-
-  useEffect(() => {
-    fetchArtworks(searchQuery);
+    fetchArtworks(searchQuery); 
   }, [currentPage, searchQuery, fetchArtworks]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchQuery(e.target.value);
+    setCurrentPage(1); 
+    setSearchQuery(inputValue); 
   };
 
   const handleArtworkClick = (artworkId) => {
@@ -95,17 +86,15 @@ const ArtSearch = () => {
 
   const getPageNumbers = () => {
     const pageNumbers = [];
-    const showPages = 5; // Number of pages to show on each side
+    const showPages = 5; 
 
-    // Calculate start and end page numbers
     let startPage = Math.max(currentPage - showPages, 1);
     let endPage = Math.min(currentPage + showPages, totalPages);
 
-    // Adjust if we're near the beginning or end
     if (currentPage <= showPages) {
       endPage = Math.min(showPages * 2 + 1, totalPages);
     } else if (currentPage >= totalPages - showPages) {
-      startPage = Math.max(totalPages - (showPages * 2), 1);
+      startPage = Math.max(totalPages - showPages * 2, 1);
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -124,8 +113,8 @@ const ArtSearch = () => {
             type="text"
             id="search"
             name="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)} 
             placeholder="Enter artist, title, culture, or description..."
           />
           <button type="submit" disabled={loading}>
@@ -151,16 +140,12 @@ const ArtSearch = () => {
                     onClick={() => handleArtworkClick(artwork.objectID)}
                     className="cursor-pointer hover:opacity-90 transition-opacity"
                   >
-                    <ArtworkCard
-                      artwork={artwork}
-                      rating={0}
-                    />
+                    <ArtworkCard artwork={artwork} rating={0} />
                   </div>
                 ))}
               </div>
               {artworks.length === 0 && <p>No artworks found.</p>}
               <div className="pagination">
-                {/* First page button */}
                 <button
                   onClick={() => setCurrentPage(1)}
                   disabled={currentPage === 1 || loading}
@@ -168,8 +153,6 @@ const ArtSearch = () => {
                 >
                   &lt;&lt;
                 </button>
-
-                {/* Previous page button */}
                 <button
                   onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1 || loading}
@@ -177,8 +160,6 @@ const ArtSearch = () => {
                 >
                   &lt;
                 </button>
-
-                {/* Page numbers */}
                 <div className="page-numbers">
                   {getPageNumbers().map((pageNum) => (
                     <button
@@ -195,8 +176,6 @@ const ArtSearch = () => {
                     </button>
                   ))}
                 </div>
-
-                {/* Next page button */}
                 <button
                   onClick={() =>
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages))
@@ -206,8 +185,6 @@ const ArtSearch = () => {
                 >
                   &gt;
                 </button>
-
-                {/* Last page button */}
                 <button
                   onClick={() => setCurrentPage(totalPages)}
                   disabled={currentPage === totalPages || loading}
