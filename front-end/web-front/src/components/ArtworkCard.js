@@ -1,6 +1,7 @@
 import "./ArtworkCards.css";
 import { ReactComponent as LocationPin } from "../assets/location_pin.svg";
 import { ReactComponent as Star } from "../assets/star.svg";
+import NoImage from "../assets/no_image.svg";
 import React, { useEffect, useRef, useState } from "react";
 
 const ArtworkCard = ({ artwork, rating }) => {
@@ -33,7 +34,7 @@ const ArtworkCard = ({ artwork, rating }) => {
       <div className="top-item">
         <div className="card-image">
           <img
-            src={artwork.primaryImage || "/api/placeholder/300/200"}
+            src={artwork.primaryImage || NoImage}
             alt={artwork.title}
           />
         </div>

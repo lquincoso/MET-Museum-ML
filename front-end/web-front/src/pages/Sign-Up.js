@@ -57,7 +57,7 @@ function SignUp() {
             inputStyle="input--credentials"
             id="login-signup-form"
             type="password"
-            placeholder="CConfirm Password"
+            placeholder="Confirm Password"
             name="password"
             onChange={(e) => setPassword2(e.target.value)}
           />

@@ -1,6 +1,7 @@
 import "./ArtworkCards.css";
 
 import React, { useEffect, useRef, useState } from "react";
+import NoImage from "../assets/no_image.svg";
 
 const ArtworkCard = ({ artwork }) => {
   const titleRef = useRef(null);
@@ -27,7 +28,7 @@ const ArtworkCard = ({ artwork }) => {
       <div className="top-item">
         <div className="card-image">
           <img
-            src={artwork.primaryImage || "/api/placeholder/300/200"}
+            src={artwork.primaryImage || NoImage}
             alt={artwork.title}
           />
         </div>
