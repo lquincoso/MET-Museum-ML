@@ -248,7 +248,7 @@ const ArtworkDetails = () => {
             </div>
           ) : activeTab === "related" ? (
             <div className="related-artwork">
-              <RelatedArt artworkId={artwork} />
+              <RelatedArt artworkId={artworkId} />
             </div>
           ) : (
             <div className="artwork-education">
