@@ -109,7 +109,7 @@ def preprocess_grouped_artworks(grouped_artworks):
                     logger.error(f"Error fetching image for artwork ID {artwork_id}: {e}")
 
 # Grouping artworks before Processing stage
-all_artwork_ids = [artwork_id for artwork_id in range(1, 500)]
+all_artwork_ids = [artwork_id for artwork_id in range(436500, 437000)]
 logger.info("Grouping artworks by metadata...")
 grouped_artworks = group_artworks_by_metadata(all_artwork_ids)
 logger.info("Preprocessing grouped artworks...")
