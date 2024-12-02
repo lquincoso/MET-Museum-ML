@@ -1,7 +1,7 @@
 .main-container {
   width: 100vw;
   height: 100vh;
-  background-image: url("/src/assets/background.svg");
+  background-image: url("/src/assets/background2.svg");
   background-size: cover;
   position: fixed;
 }
