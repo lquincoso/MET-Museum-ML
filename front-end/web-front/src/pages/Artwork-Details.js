@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ReactComponent as Star } from "../assets/star.svg";
+import NoImage from "../assets/no_image.svg";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
@@ -89,7 +90,7 @@ const ArtworkDetails = () => {
         const data = await response.json();
 
         setArtwork({
-          image: data.primaryImage || "/api/placeholder/600/400",
+          image: data.primaryImage || NoImage,
           title: data.title,
           location: data.GalleryNumber
             ? `Gallery ${data.GalleryNumber}`

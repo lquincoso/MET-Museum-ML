@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import FilterSidebar from "../components/FilterSidebar";
+// import FilterSidebar from "../components/FilterSidebar";
 import ArtworkCard from "../components/ArtworkCard";
 import "./Art-Search.css";
 
@@ -135,9 +135,9 @@ const ArtSearch = () => {
       </div>
 
       <div className="search-result-container">
-        <div className="search-filter">
+        {/* <div className="search-filter">
           <FilterSidebar />
-        </div>
+        </div> */}
         <div className="search-result">
           {error && <div className="error-message">{error}</div>}
           {loading ? (

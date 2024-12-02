@@ -51,10 +51,10 @@
   gap: 20px;
 }
 
-.search-filter {
+/* .search-filter {
   width: 180px;
   flex-shrink: 0;
-}
+} */
 
 .search-result {
   flex: 1;
