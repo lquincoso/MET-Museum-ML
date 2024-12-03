@@ -57,16 +57,16 @@ struct ArtworkCard: View {
                     }
                 }
                 
-                Text(artwork.artist)
+                Text(artwork.artistDisplayName)
                     .font(MetFonts.body)
                     .foregroundColor(MetColors.textSecondary)
                 
-                HStack {
-                    Image(systemName: "mappin.circle.fill")
-                    Text(artwork.location)
-                }
-                .font(MetFonts.body)
-                .foregroundColor(MetColors.textSecondary)
+//                HStack {
+//                    Image(systemName: "mappin.circle.fill")
+//                    Text(artwork.location)
+//                }
+//                .font(MetFonts.body)
+//                .foregroundColor(MetColors.textSecondary)
                 
                 if let userId = authViewModel.user?.email {
                     StarRating(

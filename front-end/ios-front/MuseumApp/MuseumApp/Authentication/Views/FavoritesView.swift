@@ -13,41 +13,37 @@ struct FavoritesView: View {
     @EnvironmentObject var artworkStore: ArtworkStore
     
     var favoriteArtworks: [Artwork] {
-        artworkStore.artworks.filter { artwork in
-            userArtworkStore.getUserArtwork(artworkId: artwork.id)?.isFavorite == true
+        artworkStore.artworks.compactMap { (id, artwork) in
+            userArtworkStore.getUserArtwork(artworkId: id)?.isFavorite == true ? artwork : nil
         }
     }
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                if favoriteArtworks.isEmpty {
-                    VStack(spacing: 20) {
-                        Image(systemName: "heart.slash")
-                            .font(.system(size: 50))
-                            .foregroundColor(MetColors.red)
-                        
-                        Text("No Favorites Yet")
-                            .font(MetFonts.titleMedium)
-                        
-                        Text("Start exploring artworks and tap the heart to add them to your favorites.")
-                            .font(MetFonts.body)
-                            .foregroundColor(MetColors.textSecondary)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
-                    }
-                } else {
-                    ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(favoriteArtworks) { artwork in
-                                ArtworkCard(artwork: artwork)
-                            }
-                        }
-                        .padding()
+        ScrollView {
+            if favoriteArtworks.isEmpty {
+                VStack(spacing: 20) {
+                    Image(systemName: "heart.slash")
+                        .font(.system(size: 50))
+                        .foregroundColor(MetColors.red)
+                    
+                    Text("No Favorites Yet")
+                        .font(MetFonts.titleMedium)
+                    
+                    Text("Start exploring artworks and tap the heart to add them to your favorites.")
+                        .font(MetFonts.body)
+                        .foregroundColor(MetColors.textSecondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
+            } else {
+                LazyVStack(spacing: 16) {
+                    ForEach(favoriteArtworks) { artwork in
+                        ArtworkCard(artwork: artwork)
                     }
                 }
+                .padding()
             }
-            .navigationTitle("Favorites")
         }
+        .navigationBarTitle("Favorites", displayMode: .large)
     }
 }

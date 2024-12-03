@@ -9,9 +9,9 @@ import Foundation
 
 struct Artwork: Identifiable {
     let id: Int
+    let primaryImage: String
     let title: String
-    let artist: String
-    let location: String
-    let description: String
-    let year: String
+    let artistDisplayName: String
+    let culture: String
+    let objectBeginDate: Int
 }

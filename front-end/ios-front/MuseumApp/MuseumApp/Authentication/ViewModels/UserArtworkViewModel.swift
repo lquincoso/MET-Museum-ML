@@ -18,7 +18,6 @@ class UserArtworkViewModel: ObservableObject {
             let userArtwork = UserArtwork(artworkId: artworkId, userId: userId, isFavorite: true)
             userArtworks.append(userArtwork)
         }
-        // TODO: Sync with backend
     }
     
     func updateRating(artworkId: Int, userId: String, rating: Int) {
@@ -28,7 +27,6 @@ class UserArtworkViewModel: ObservableObject {
             let userArtwork = UserArtwork(artworkId: artworkId, userId: userId, rating: rating)
             userArtworks.append(userArtwork)
         }
-        // TODO: Sync with backend
     }
     
     func getUserArtwork(artworkId: Int) -> UserArtwork? {
