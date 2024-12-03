@@ -15,7 +15,7 @@ class TestTourAPI(unittest.TestCase):
         self.client.testing = True
 
     def test_get_galleries(self):
-        # Test the '/api/galleries' endpoint to get all galleries
+        # Testing the '/api/galleries' endpoint to get all galleries
         response = self.client.get('/api/galleries')
         self.assertEqual(response.status_code, 200)
         
@@ -24,7 +24,7 @@ class TestTourAPI(unittest.TestCase):
         self.assertIn('100', data)
 
     def test_get_shortest_path_valid(self):
-        # Test the '/api/shortest-path' endpoint with valid gallery IDs
+        # Testing the '/api/shortest-path' endpoint with valid gallery IDs
         response = self.client.get('/api/shortest-path', query_string={'start': '100', 'end': '101'})
         self.assertEqual(response.status_code, 200)
         
@@ -34,7 +34,7 @@ class TestTourAPI(unittest.TestCase):
         self.assertGreater(len(data['path']), 0)
 
     def test_get_shortest_path_invalid(self):
-        # Test the '/api/shortest-path' endpoint with invalid gallery IDs
+        # Testing the '/api/shortest-path' endpoint with invalid gallery IDs
         response = self.client.get('/api/shortest-path', query_string={'start': '999', 'end': '888'})
         self.assertEqual(response.status_code, 400)
         

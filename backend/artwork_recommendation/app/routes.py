@@ -1,8 +1,12 @@
 from flask import Blueprint, request, jsonify
-from app.recommender import recommend_artworks
-from app.met_api import search_artworks, get_artwork_by_id
 import asyncio
 import logging
+
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from artwork_recommendation.app.recommender import recommend_artworks
+from artwork_recommendation.app.met_api import search_artworks, get_artwork_by_id
 
 main_routes = Blueprint('main_routes', __name__)
 

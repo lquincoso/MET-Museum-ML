@@ -9,13 +9,12 @@ from backend.artwork_recommendation.app.recommender import fetch_image
 @pytest.mark.asyncio
 @patch('aiohttp.ClientSession.get')
 async def test_fetch_image_success(mock_get):
-    # Mock a successful response with an image
+    # Testing a successful response with an image
     img = Image.new('RGB', (10, 10), color='red')
     img_byte_arr = io.BytesIO()
     img.save(img_byte_arr, format='PNG')
     img_data = img_byte_arr.getvalue()
 
-    # Correcting the way we mock the async response
     mock_response = MagicMock()
     mock_response.__aenter__.return_value.status = 200
     mock_response.__aenter__.return_value.read = AsyncMock(return_value=img_data)
@@ -31,7 +30,7 @@ async def test_fetch_image_success(mock_get):
 @pytest.mark.asyncio
 @patch('aiohttp.ClientSession.get')
 async def test_fetch_image_not_found(mock_get):
-    # Mock a 404 Not Found response
+    # Testing a 404 Not Found response
     mock_response = AsyncMock()
     mock_response.status = 404
     mock_response.read.return_value = None
@@ -45,7 +44,7 @@ async def test_fetch_image_not_found(mock_get):
 @pytest.mark.asyncio
 @patch('aiohttp.ClientSession.get')
 async def test_fetch_image_timeout(mock_get):
-    # Mock a timeout
+    # Testing a timeout during image fetching
     mock_get.side_effect = Exception('Timeout occurred')
 
     async with ClientSession() as session:
@@ -56,7 +55,7 @@ async def test_fetch_image_timeout(mock_get):
 @pytest.mark.asyncio
 @patch('aiohttp.ClientSession.get')
 async def test_fetch_image_invalid_data(mock_get):
-    # Mock a successful response but with invalid image data
+    # Testing a successful response but with invalid image data
     mock_response = AsyncMock()
     mock_response.status = 200
     mock_response.read.return_value = b'not_an_image'
