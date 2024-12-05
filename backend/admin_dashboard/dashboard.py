@@ -60,10 +60,10 @@ class InteractionsDashboard:
     def get_most_active_hour(self):
         query = """
         SELECT 
-            HOUR(created_at) as hour,
+            HOUR(created_at) as hour_numeric,
             COUNT(*) as interactions
         FROM api_artworkrating
-        GROUP BY hour
+        GROUP BY HOUR(created_at)
         ORDER BY interactions DESC
         LIMIT 1
         """
@@ -97,11 +97,11 @@ class InteractionsDashboard:
     def get_hourly_activity(self):
         query = """
         SELECT 
-            HOUR(created_at) as hour,
+            HOUR(created_at) as hour_numeric,
             COUNT(*) as interactions
         FROM api_artworkrating
-        GROUP BY hour
-        ORDER BY hour ASC
+        GROUP BY HOUR(created_at)
+        ORDER BY hour_numeric ASC
         """
         return self._execute_query(query)
 
@@ -177,6 +177,7 @@ class InteractionsDashboard:
 
 #Function for donut chart
 def plot_donut_chart(data):
+    print(data)
     fig, ax = plt.subplots()
     ax.pie(
         data['Count'], 
@@ -277,9 +278,9 @@ def main():
         
         st.divider()
         # Monthly Interactions Chart
-        st.subheader("Monthly Interactions")
-        if not monthly_interactions.empty:
-            st.bar_chart(monthly_interactions.set_index('month')['total_ratings'])
+        # st.subheader("Monthly Interactions")
+        # if not monthly_interactions.empty:
+        #     st.bar_chart(monthly_interactions.set_index('month')['total_ratings'])
 
         col_1, col_2, col_3 = st.columns(3)
 
@@ -312,21 +313,27 @@ def main():
 
         with col_2:
             
+            #Hourly Activity
             st.subheader("Hourly Activity")
             if not hourly_activity.empty:
-                st.bar_chart(hourly_activity.set_index('hour'))
+                hourly_activity['hour_label'] = hourly_activity['hour_numeric'].apply(
+                    lambda x: f"{x % 12 or 12} {'AM' if x < 12 else 'PM'}"
+            )
+                st.bar_chart(hourly_activity.set_index('hour_label')['interactions'])
             else:
                 st.info("No activity data available.")
 
             # Most Active Hour
             st.subheader("Most Active Hour")
             if not most_active_hour.empty:
-                hour = most_active_hour['hour'][0]
+                hour_numeric = most_active_hour['hour_numeric'][0]
+                hour_label = f"{hour_numeric % 12 or 12} {'AM' if hour_numeric < 12 else 'PM'}"
                 interactions = most_active_hour['interactions'][0]
-                st.metric(label="🕒 Most Active Hour", value=f"{hour}:00", delta=f"{interactions} interactions")
+
+                st.metric(label="🕒 Most Active Hour", value=hour_label, delta=f"{interactions} interactions")
             else:
                 st.info("No activity data available.")
-            
+                    
     except Exception as e:
         st.error(f"❌ An error occurred: {str(e)}")
     finally:
