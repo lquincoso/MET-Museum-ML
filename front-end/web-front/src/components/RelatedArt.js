@@ -9,7 +9,6 @@ function RelatedArt({ artworkId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // function to fetch artwork details (Might not need modification)
   const fetchArtworkDetails = useCallback(async (objectIds) => {
     const artworkPromises = objectIds.map((id) =>
       fetch(
@@ -31,8 +30,7 @@ function RelatedArt({ artworkId }) {
       setLoading(true);
       setError(null);
 
-      // Making a request to the backend to get related artwork IDs
-      const response = await fetch("http://127.0.0.1:5000/recommend", {
+      const response = await fetch("http://127.0.0.1:5000/artwork/recommend", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
