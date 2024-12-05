@@ -10,13 +10,39 @@ function Education({ artwork }) {
   const [geminiResponse, setGeminiResponse] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
 
-  // Function to GET Google Books data
-  const fetchGoogleBooks = useCallback(async (query) => {
+  const fetchWikipediaArticles = async (query) => {
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`
+        `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(
+          query
+        )}&format=json&origin=*`
       );
       const data = await response.json();
+
+      return (
+        data.query?.search?.slice(0, 1).map((result) => ({
+          title: result.title,
+          summary: result.snippet.replace(/<\/?[^>]+(>|$)/g, ""), // Strip HTML tags
+          url: `https://en.wikipedia.org/wiki/${encodeURIComponent(
+            result.title
+          )}`,
+        })) || []
+      );
+    } catch (error) {
+      console.error("Error fetching Wikipedia articles:", error);
+      return [];
+    }
+  };
+
+  const fetchGoogleBooks = async (query) => {
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
+          query
+        )}`
+      );
+      const data = await response.json();
+
       return (
         data.items?.slice(0, 4).map((book) => ({
           title: book.volumeInfo.title,
@@ -28,29 +54,8 @@ function Education({ artwork }) {
       console.error("Error fetching Google Books:", error);
       return [];
     }
-  }, []);
+  };
 
-  // Function to GET Project Gutenberg data
-  const fetchGutenbergBooks = useCallback(async (query) => {
-    try {
-      const response = await fetch(
-        `https://gutendex.com/books/?search=${encodeURIComponent(query)}`
-      );
-      const data = await response.json();
-      return (
-        data.results?.slice(0, 4).map((book) => ({
-          title: book.title,
-          summary: "Available on Project Gutenberg.",
-          url: `https://www.gutenberg.org/ebooks/${book.id}`,
-        })) || []
-      );
-    } catch (error) {
-      console.error("Error fetching Project Gutenberg:", error);
-      return [];
-    }
-  }, []);
-
-  // Function to GET response from Google Gemini
   const fetchGemini = async (query) => {
     try {
       setChatLoading(true);
@@ -63,14 +68,13 @@ function Education({ artwork }) {
       );
       setGeminiResponse(response.data.response || "No insights available.");
     } catch (error) {
-      console.error("Error details:", error.response?.data || error.message);
+      console.error("Error fetching Gemini data:", error.response?.data || error.message);
       setGeminiResponse("An error occurred while fetching Gemini data.");
     } finally {
       setChatLoading(false);
     }
   };
 
-  // Main function
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
@@ -88,41 +92,29 @@ function Education({ artwork }) {
         return;
       }
 
-      // GET data from Wikipedia and Britannica
-      const wikipediaResponse = await fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`
-      );
-      const wikipediaData = await wikipediaResponse.json();
-
+      const wikipediaArticles = await fetchWikipediaArticles(query);
       const britannicaUrl = `https://www.britannica.com/search?query=${encodeURIComponent(
         query
       )}`;
       const googleBooks = await fetchGoogleBooks(query);
-      const gutenbergBooks = await fetchGutenbergBooks(query);
 
       setArticles([
-        {
-          title: "Wikipedia",
-          summary: wikipediaData.extract || "No summary available.",
-          url: wikipediaData.content_urls?.desktop?.page || "#",
-        },
+        ...wikipediaArticles,
         {
           title: "Encyclopedia Britannica",
           summary: "Search for this topic on Britannica.",
           url: britannicaUrl,
         },
       ]);
+      setBooks([...googleBooks]);
 
-      setBooks([...googleBooks, ...gutenbergBooks]);
-
-      // GET Gemini response
       fetchGemini(query);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, [artwork, fetchGoogleBooks, fetchGutenbergBooks]);
+  }, [artwork]);
 
   useEffect(() => {
     fetchData();
@@ -138,6 +130,7 @@ function Education({ artwork }) {
 
   return (
     <div className="education-container">
+      {/* Articles Section */}
       <div className="education-section">
         <h3>Articles related to "{artwork.title || "This Artwork"}"</h3>
         <div className="education-grid">
@@ -158,6 +151,8 @@ function Education({ artwork }) {
           ))}
         </div>
       </div>
+
+      {/* Books Section */}
       <div className="education-section">
         <h3>Books related to "{artwork.title || "This Artwork"}"</h3>
         <div className="education-grid">
@@ -178,6 +173,8 @@ function Education({ artwork }) {
           ))}
         </div>
       </div>
+
+      {/* Gemini Insights */}
       <div className="education-section">
         <h3>Insights from Gemini</h3>
         {chatLoading ? (
