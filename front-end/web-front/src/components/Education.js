@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Education.css";
-import axios from 'axios';
+import axios from "axios";
 
 function Education({ artwork }) {
   const [articles, setArticles] = useState([]);
@@ -11,13 +11,12 @@ function Education({ artwork }) {
   const [chatLoading, setChatLoading] = useState(false);
 
   // Function to GET Google Books data
-  const fetchGoogleBooks = async (query) => {
+  const fetchGoogleBooks = useCallback(async (query) => {
     try {
       const response = await fetch(
         `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`
       );
       const data = await response.json();
-
       return (
         data.items?.slice(0, 4).map((book) => ({
           title: book.volumeInfo.title,
@@ -29,16 +28,15 @@ function Education({ artwork }) {
       console.error("Error fetching Google Books:", error);
       return [];
     }
-  };
+  }, []);
 
   // Function to GET Project Gutenberg data
-  const fetchGutenbergBooks = async (query) => {
+  const fetchGutenbergBooks = useCallback(async (query) => {
     try {
       const response = await fetch(
         `https://gutendex.com/books/?search=${encodeURIComponent(query)}`
       );
       const data = await response.json();
-
       return (
         data.results?.slice(0, 4).map((book) => ({
           title: book.title,
@@ -50,13 +48,12 @@ function Education({ artwork }) {
       console.error("Error fetching Project Gutenberg:", error);
       return [];
     }
-  };
+  }, []);
 
   // Function to GET response from Google Gemini
   const fetchGemini = async (query) => {
     try {
       setChatLoading(true);
-      // Send the prompt to your backend server to get the response from Gemini
       const response = await axios.post(
         "http://127.0.0.1:5000/education/api/gemini",
         { prompt: query },
@@ -74,7 +71,7 @@ function Education({ artwork }) {
   };
 
   // Main function
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const queryParts = [];
@@ -93,9 +90,7 @@ function Education({ artwork }) {
 
       // GET data from Wikipedia and Britannica
       const wikipediaResponse = await fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
-          query
-        )}`
+        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`
       );
       const wikipediaData = await wikipediaResponse.json();
 
@@ -127,11 +122,11 @@ function Education({ artwork }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [artwork, fetchGoogleBooks, fetchGutenbergBooks]);
 
   useEffect(() => {
     fetchData();
-  }, [artwork]);
+  }, [fetchData]);
 
   if (loading) {
     return <div className="education-loading">Loading resources...</div>;
@@ -143,7 +138,6 @@ function Education({ artwork }) {
 
   return (
     <div className="education-container">
-      {/* Articles */}
       <div className="education-section">
         <h3>Articles related to "{artwork.title || "This Artwork"}"</h3>
         <div className="education-grid">
@@ -164,8 +158,6 @@ function Education({ artwork }) {
           ))}
         </div>
       </div>
-
-      {/* Books */}
       <div className="education-section">
         <h3>Books related to "{artwork.title || "This Artwork"}"</h3>
         <div className="education-grid">
@@ -186,8 +178,6 @@ function Education({ artwork }) {
           ))}
         </div>
       </div>
-
-      {/* Gemini */}
       <div className="education-section">
         <h3>Insights from Gemini</h3>
         {chatLoading ? (
