@@ -31,12 +31,12 @@ class ArtworkService {
     
     static func searchArtworks(query: String) async throws -> [Int] {
         let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
-        let urlString = "\(baseUrl)/search?q=\(encodedQuery)"
-        
+        let urlString = "https://collectionapi.metmuseum.org/public/collection/v1/search?q=\(encodedQuery)"
+            
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
         }
-        
+            
         let (data, _) = try await URLSession.shared.data(from: url)
         let response = try JSONDecoder().decode(SearchResponse.self, from: data)
         return response.objectIDs ?? []

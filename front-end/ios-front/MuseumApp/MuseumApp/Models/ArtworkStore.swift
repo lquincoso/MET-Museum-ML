@@ -13,10 +13,11 @@ class ArtworkStore: ObservableObject {
     @Published var isLoading = false
     @Published var error: Error?
     
-    func loadArtworks(query: String = "painting") async {
+    func loadArtworks(query: String = "") async {
         isLoading = true
         do {
-            let ids = try await ArtworkService.searchArtworks(query: query)
+            let searchQuery = query.isEmpty ? "painting" : query
+            let ids = try await ArtworkService.searchArtworks(query: searchQuery)
             var loadedArtworks: [Int: Artwork] = [:]
             
             for id in ids.prefix(10) {
@@ -38,5 +39,9 @@ class ArtworkStore: ObservableObject {
             self.error = error
         }
         isLoading = false
+    }
+    
+    func searchArtworks(_ query: String) async {
+        await loadArtworks(query: query)
     }
 }
