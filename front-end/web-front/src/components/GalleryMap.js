@@ -4,7 +4,6 @@ import L from 'leaflet';
 import axios from 'axios';
 import './GalleryMap.css';
 
-// Reset Leaflet's icon defaults
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
@@ -37,7 +36,7 @@ function GalleryMap({ path }) {
   useEffect(() => {
     const fetchGalleries = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:5000/api/galleries');
+        const response = await axios.get('http://127.0.0.1:5000/tour/galleries');
         setGalleries(response.data);
       } catch (error) {
         console.error('Error fetching gallery data:', error);

@@ -58,7 +58,7 @@ function Education({ artwork }) {
       setChatLoading(true);
       // Send the prompt to your backend server to get the response from Gemini
       const response = await axios.post(
-        "http://127.0.0.1:5001/api/gemini",
+        "http://127.0.0.1:5000/education/api/gemini",
         { prompt: query },
         {
           headers: { "Content-Type": "application/json" },
