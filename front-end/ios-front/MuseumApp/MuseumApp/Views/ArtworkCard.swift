@@ -11,7 +11,6 @@ struct ArtworkCard: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var userArtworkStore: UserArtworkStore
     let artwork: Artwork
-    
     @State private var animatingHeart = false
     
     private var userArtwork: UserArtwork? {
@@ -20,13 +19,34 @@ struct ArtworkCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Rectangle()
-                .fill(Color(.systemGray5))
-                .frame(height: 200)
-                .overlay(
-                    Text("Artwork Image")
-                        .foregroundColor(.gray)
-                )
+            AsyncImage(url: URL(string: artwork.primaryImage)) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(height: 200)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 200)
+                case .failure(_):
+                    Rectangle()
+                        .fill(Color(.systemGray5))
+                        .frame(height: 200)
+                        .overlay(
+                            Text("Failed to load image")
+                                .foregroundColor(.gray)
+                        )
+                @unknown default:
+                    Rectangle()
+                        .fill(Color(.systemGray5))
+                        .frame(height: 200)
+                        .overlay(
+                            Text("Loading...")
+                                .foregroundColor(.gray)
+                        )
+                }
+            }
             
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
@@ -57,16 +77,9 @@ struct ArtworkCard: View {
                     }
                 }
                 
-                Text(artwork.artist)
+                Text(artwork.artistDisplayName)
                     .font(MetFonts.body)
                     .foregroundColor(MetColors.textSecondary)
-                
-                HStack {
-                    Image(systemName: "mappin.circle.fill")
-                    Text(artwork.location)
-                }
-                .font(MetFonts.body)
-                .foregroundColor(MetColors.textSecondary)
                 
                 if let userId = authViewModel.user?.email {
                     StarRating(

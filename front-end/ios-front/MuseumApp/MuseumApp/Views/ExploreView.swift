@@ -10,39 +10,63 @@ import SwiftUI
 struct ExploreView: View {
     @EnvironmentObject var artworkStore: ArtworkStore
     @State private var searchText = ""
+    @State private var isSearching = false
     
-    let artworks = [
-        Artwork(id: 1, title: "One-dollar Liberty Head Coin", artist: "James Barton Longacre", location: "Gallery 774", description: "Historic American coin design", year: "1849"),
-        Artwork(id: 2, title: "Ten-dollar Liberty Head Coin", artist: "Christian Gobrecht", location: "Special Exhibition", description: "Rare numismatic specimen", year: "1838"),
-        Artwork(id: 3, title: "Ale Glass", artist: "New England Glass Company", location: "Gallery 774", description: "19th century glassware", year: "1850-1870")
-    ]
+    var filteredArtworks: [Artwork] {
+        let artworks = Array(artworkStore.artworks.values)
+        if searchText.isEmpty {
+            return artworks
+        }
+        return artworks.filter { artwork in
+            artwork.title.lowercased().contains(searchText.lowercased()) ||
+            artwork.artistDisplayName.lowercased().contains(searchText.lowercased())
+        }
+    }
     
     var body: some View {
         NavigationView {
             VStack {
-                SearchBar(text: $searchText)
-                
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(filteredArtworks) { artwork in
-                            ArtworkCard(artwork: artwork)
+                HStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                        
+                        TextField("Search artworks...", text: $searchText)
+                            .textFieldStyle(MetTextFieldStyle())
+                            .autocapitalization(.none)
+                        
+                        if !searchText.isEmpty {
+                            Button(action: {
+                                searchText = ""
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
-                    .padding()
+                    .padding(8)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                
+                if artworkStore.isLoading {
+                    ProgressView()
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(filteredArtworks) { artwork in
+                                ArtworkCard(artwork: artwork)
+                            }
+                        }
+                        .padding()
+                    }
                 }
             }
             .navigationTitle("Explore")
         }
-    }
-    
-    var filteredArtworks: [Artwork] {
-        if searchText.isEmpty {
-            return artworkStore.artworks
-        } else {
-            return artworkStore.artworks.filter { artwork in
-                artwork.title.lowercased().contains(searchText.lowercased()) ||
-                artwork.artist.lowercased().contains(searchText.lowercased())
-            }
+        .task {
+            await artworkStore.loadArtworks()
         }
     }
 }

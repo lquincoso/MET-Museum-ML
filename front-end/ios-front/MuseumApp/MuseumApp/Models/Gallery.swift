@@ -5,15 +5,16 @@
 //  Created by Mauricio Piedra on 11/29/24.
 //
 
-import Foundation
-
 struct Gallery: Codable {
-    let number: String
     let name: String
     let coordinates: [Double]
-    let connections: [String]
+    let neighbors: [String: Double]
+    let offsets: [Int]
+    let artworks: [GalleryArtwork]
 }
 
-struct PathResponse: Codable {
-    let path: [String]
+struct GalleryArtwork: Codable {
+    let objectID: Int
+    let title: String?
+    let artist: String?
 }
