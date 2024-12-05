@@ -17,6 +17,7 @@ struct MetTextFieldStyle: TextFieldStyle {
     }
 }
 
+// You can also add other styles here
 struct MetColors {
     static let red = Color("MetRed")  // #E4002B
     static let background = Color.white

@@ -31,6 +31,7 @@ class TourViewModel: ObservableObject {
         isLoading = true
         do {
             path = try await tourService.getShortestPath(start: start, end: end)
+            print("Shortest Path: \(path)")
         } catch {
             self.error = error
         }

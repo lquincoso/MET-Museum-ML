@@ -120,5 +120,5 @@ struct ArtworkRecommendations: View {
 }
 
 #Preview {
-    ArtworkRecommendations(desiredArtwork: "9854")
+    ArtworkRecommendations(desiredArtwork: "436510")
 }

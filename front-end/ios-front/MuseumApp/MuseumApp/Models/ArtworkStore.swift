@@ -13,14 +13,15 @@ class ArtworkStore: ObservableObject {
     @Published var isLoading = false
     @Published var error: Error?
     
-    func loadArtworks(query: String = "") async {
+    func loadArtworks(query: String = "painting") async {
         isLoading = true
         do {
-            let searchQuery = query.isEmpty ? "painting" : query
-            let ids = try await ArtworkService.searchArtworks(query: searchQuery)
+            let ids = try await ArtworkService.searchArtworks(query: query)
             var loadedArtworks: [Int: Artwork] = [:]
             
-            for id in ids.prefix(10) {
+            let filteredIds = ids.filter { $0 >= 436500 && $0 <= 436510 }
+            
+            for id in filteredIds {
                 if let details = try? await ArtworkService.fetchArtworkDetails(imageID: id) {
                     let artwork = Artwork(
                         id: id,
@@ -39,9 +40,5 @@ class ArtworkStore: ObservableObject {
             self.error = error
         }
         isLoading = false
-    }
-    
-    func searchArtworks(_ query: String) async {
-        await loadArtworks(query: query)
     }
 }

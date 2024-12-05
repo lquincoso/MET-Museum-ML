@@ -4,7 +4,6 @@
 //
 //  Created by Mauricio Piedra on 11/21/24.
 //
-
 import SwiftUI
 
 struct ArtworkCard: View {
@@ -53,6 +52,11 @@ struct ArtworkCard: View {
                     Text(artwork.title)
                         .font(MetFonts.body)
                         .fontWeight(.semibold)
+//                        .background{
+//                            Rectangle()
+//                                .fill(Color(.systemGray5))
+//                                .cornerRadius(8)
+//                        }
                     
                     Spacer()
                     
@@ -69,17 +73,32 @@ struct ArtworkCard: View {
                                 }
                             }
                         }
-                    } label: {
+                    }
+                    label: {
                         Image(systemName: userArtwork?.isFavorite == true ? "heart.fill" : "heart")
                             .foregroundColor(userArtwork?.isFavorite == true ? .red : .gray)
                             .scaleEffect(animatingHeart ? 1.3 : 1.0)
                             .rotationEffect(animatingHeart ? .degrees(20) : .degrees(0))
                     }
                 }
-                
-                Text(artwork.artistDisplayName)
-                    .font(MetFonts.body)
-                    .foregroundColor(MetColors.textSecondary)
+                HStack {
+                    Text(artwork.artistDisplayName)
+                        .font(MetFonts.body)
+                        .foregroundColor(MetColors.textSecondary)
+//                        .background {
+//                            Rectangle()
+//                                .fill(Color(.systemGray5))
+//                                .cornerRadius(8)
+//                        }
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: ArtworkRecommendations(desiredArtwork: String(artwork.id))) {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .foregroundColor(MetColors.red)
+                            .imageScale(.large)
+                    }
+                }
                 
                 if let userId = authViewModel.user?.email {
                     StarRating(
@@ -93,6 +112,11 @@ struct ArtworkCard: View {
                         )
                     }
                     .padding(.top, 4)
+//                    .background{
+//                        Rectangle()
+//                            .fill(Color(.systemGray5))
+//                            .cornerRadius(8)
+//                    }
                 }
             }
             .padding()

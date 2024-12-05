@@ -9,7 +9,7 @@ import Foundation
 struct RelatedArtworks {
     
     static func fetchRelatedArt(artworkId: String) async throws -> [Int] {
-        guard let url = URL(string: "http://127.0.0.1:5000/recommend") else {
+        guard let url = URL(string: "http://127.0.0.1:5000/artwork/recommend") else {
             throw URLError(.badURL)
         }
         
