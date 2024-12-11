@@ -58,9 +58,9 @@ npm install
 ```bash
 npm start
 ```
-   The application will be accessible at `http://localhost:3000`.
+The application will be accessible at `http://localhost:3000`.
 
-2. **Backend (Django) Setup**
+#### Backend (Django) Setup ####
 1.  Navigate to the backend directory: 
 ```bash
 cd backend/Django
@@ -79,8 +79,7 @@ python manage.py runserver
 ```
 The backend server will start at `http://localhost:8000`
 
-
-3. **Flask API Setup and Execution**
+#### Flask API Setup and Execution ####
 1. Navigate to the backend directory:
 ```bash
 cd backend
@@ -99,7 +98,7 @@ The Flask API will start on `http://localhost:5000`.
 - Recommendation System: Suggests visually similar artworks using ML models.
 - Educational Feature: Offers AI-generated insights and related resources for selected artworks.
    
-4. **iOS Application Setup**
+#### iOS Application Setup ####
 1. Navigate to the iOS frontend directory:
 ```bash
 cd ios-front/MuseumApp
@@ -108,7 +107,7 @@ cd ios-front/MuseumApp
 3. Configure the signing & team settings (if required).
 4. Build and run the application on a simulator or device.
 
-5. **Machine Learning Models**
+#### Machine Learning Models ####
 1. Navigate to the `artwork_recommendation/models/` directory.
 2. Download the required ResNet50 model weights:
 ```bash
