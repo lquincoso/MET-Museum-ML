@@ -15,9 +15,9 @@ Provides dedicated endpoints for:
 **Streamlit Dashboard:**
 Offers analytics and insights into user interactions, artwork popularity, and system performance, helping museum administrators make informed decisions.
 
-### Step-by-Step Instructions 
+## Step-by-Step Instructions 
 
-#### Backend (Django) Setup ####
+### Backend (Django) Setup ###
 1.  Navigate to the backend directory: 
 ```bash
 cd Django
@@ -36,7 +36,7 @@ python manage.py runserver
 ```
 The backend server will start at `http://localhost:8000`
 
-#### Flask API Setup and Execution ####
+### Flask API Setup and Execution ###
 1. Navigate to the backend directory.
 
 2. Install the required Python dependencies:
@@ -54,7 +54,7 @@ The Flask API will start on `http://localhost:5000`.
 - Recommendation System: Suggests visually similar artworks using ML models.
 - Educational Feature: Offers AI-generated insights and related resources for selected artworks.
 
-#### Streamlit Dashboard ####
+### Streamlit Dashboard ###
 1. Navigate to the admin_dashboard directory:
 ```bash
 cd admin_dashboard
@@ -68,6 +68,7 @@ pip install streamlit
 streamlit run dashboard.py
 ```
 The dashboard will be accessible at `http://localhost:8501`.
+
 4. Purpose of the Dashboard:
 - User Interaction Metrics: Analyze visitor interactions, including popular artworks and navigation patterns.
 - Artwork Analytics: Identify trending pieces and engagement levels.
