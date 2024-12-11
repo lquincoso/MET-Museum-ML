@@ -45,8 +45,7 @@ This project creates an immersive digital platform for exploring the Metropolita
 ```
 
 ### Step-by-Step Instructions
-
-1. **Frontend (Web) Setup**
+#### Frontend (Web) Setup###
 1. Navigate to the web frontend directory
 ```bash
 cd front-end/web-front
