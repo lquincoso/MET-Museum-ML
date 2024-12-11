@@ -97,6 +97,25 @@ The Flask API will start on `http://localhost:5000`.
 - Tour: Provides optimized routes through museum galleries.
 - Recommendation System: Suggests visually similar artworks using ML models.
 - Educational Feature: Offers AI-generated insights and related resources for selected artworks.
+
+#### Streamlit Dashboard ####
+1. Navigate to the admin_dashboard directory:
+```bash
+cd admin_dashboard
+```
+2. Install Streamlit if not already installed:
+```bash
+pip install streamlit
+```
+3. Streamlit Dashboard
+```bash
+streamlit run dashboard.py
+```
+The dashboard will be accessible at `http://localhost:8501`.
+4. Purpose of the Dashboard:
+- User Interaction Metrics: Analyze visitor interactions, including popular artworks and navigation patterns.
+- Artwork Analytics: Identify trending pieces and engagement levels.
+- System Monitoring: Track API usage and performance
    
 #### iOS Application Setup ####
 1. Navigate to the iOS frontend directory:
