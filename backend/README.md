@@ -21,7 +21,7 @@ Offers analytics and insights into user interactions, artwork popularity, and sy
 ### Backend (Django) Setup ###
 1.  Navigate to the backend directory: 
 ```bash
-cd Django
+cd django
 ``` 
 2. Create a virtual environment and activate it:
 ```bash
