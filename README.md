@@ -18,11 +18,13 @@ This project creates an immersive digital platform for exploring the Metropolita
 ### Frontend
 
 - React.js
+- Swift
 
 ### Backend
 
 - Django
 - Poetry
+- Flask
 
 ## 🛠️ Installation
 
@@ -60,6 +62,149 @@ This project creates an immersive digital platform for exploring the Metropolita
    python manage.py runserver
    ```
    The backend server will start at `http://localhost:8000`
+
+## Project Structure
+The project directory structure is as follows:
+
+### Backend
+```css
+backend/
+├── admin_dashboard/
+│   ├── dashboard.py
+│   ├── keys_example.txt
+│   ├── README.md
+│   └── requirements.txt
+├── artwork_recommendation/
+│   ├── app/
+│   │   ├── data/
+│   │   │   ├── __init__.py
+│   │   │   └── cache.pkl
+│   │   ├── models/
+│   │   │   ├── download_model.py
+│   │   │   ├── resnet50_model.pth
+│   │   ├── tests/
+│   |   |   ├── __init__.py
+│   │   │   ├── test_recommender.py
+│   │   ├── __init__.py
+│   │   ├── met_api.py
+│   │   ├── recommender.py
+│   │   └── routes.py
+│   ├── __init__.py
+│   └── README.md
+├── django/
+│   ├── api/
+│   │   ├── migrations/
+|   │   │   ├── 0001_initial.py
+│   │   |   ├── 0002_alter_profile_email.py
+│   │   |   └── 0003_artworkrating.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── met_backend/
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+│   │   ├── manage.py
+│   │   └── .env.example
+│   ├── manage.py
+│   ├── poetry.lock
+│   └── pyproject.toml
+├── education/
+│   ├── __init__.py
+│   ├── education_blueprint.py
+│   └── requirements.txt
+├── tour/
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── galleries_generator.py
+│   │   └── galleries.json
+│   ├── tests/
+│   │   ├── __init__.py
+│   │   └──  test_app.py
+│   ├── __init__.py
+│   ├── pathfinding.py
+│   ├── tour_blueprint.py
+│   └── requirements.txt
+├── __init__.py
+├── requirements.txt
+└── run.py
+```
+
+### Frontend - iOS
+```css
+ios-front/
+├── MuseumApp/
+│   ├── Fonts/
+│   │   ├── OpenSans-Regular.ttf
+│   │   ├── OpenSans-SemiBold.ttf
+│   │   ├── PlayfairDisplay-Bold.ttf
+│   │   └── PlayfairDisplay-SemiBold.ttf
+│   ├── MuseumApp/
+│   │   ├── Assets.xcassets/
+│   │   ├── Authentication/
+│   │   ├── Extensions/
+│   │   ├── Models/
+│   │   ├── Preview Content/
+│   │   ├── Services/
+│   │   ├── Views/
+│   │   ├── ContentView.swift
+│   │   ├── Info.plist
+│   │   ├── MuseumAppApp.swift
+│   │   ├── MuseumTabView.swift
+│   │   └── Styles.swift
+│   └── MuseumApp.xcodeproj/
+│       ├── project.xcworkspace
+│       ├── xcuserdata/
+│       └── project.pbxproj
+└── README.md
+```
+
+### Frontend - Web Frontend
+web-front/
+├── node_modules/
+├── public/
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── ArtInfo.js
+│   │   ├── ArtworkCard.js
+│   │   ├── Button.js
+│   │   ├── Eduaction.js
+│   │   ├── FilterSidebar.js
+│   │   ├── GalleryMap.js
+│   │   ├── InputField.js
+│   │   ├── Navbar.js
+│   │   ├── RelatedArt.js
+│   │   └── RelatedArtworkCard.js
+│   ├── context/
+│   │   └── AuthContext.js
+│   ├── pages/
+│   │   ├── Art-Search.js
+│   │   ├── Artwork-Details.js
+│   │   ├── Home.js
+│   │   ├── Login.js
+│   │   ├── My-Gallery.js
+│   │   ├── Sign-Up.js
+│   │   └── Tour.js
+│   ├── App.js
+│   ├── App.css
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   └── setupTests.js
+├── package-lock.json
+└── package.json
+
 
 ## 📄 License
 
