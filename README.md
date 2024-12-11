@@ -63,7 +63,7 @@ The application will be accessible at `http://localhost:3000`.
 #### Backend (Django) Setup ####
 1.  Navigate to the backend directory: 
 ```bash
-cd backend/Django
+cd backend/django
 ``` 
 2. Create a virtual environment and activate it:
 ```bash
@@ -101,7 +101,7 @@ The Flask API will start on `http://localhost:5000`.
 #### Streamlit Dashboard ####
 1. Navigate to the admin_dashboard directory:
 ```bash
-cd admin_dashboard
+cd backend/admin_dashboard
 ```
 2. Install Streamlit if not already installed:
 ```bash
