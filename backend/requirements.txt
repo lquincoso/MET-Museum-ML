@@ -1,3 +1,13 @@
 flask
 flask-cors
 google-generativeai
+torch
+torchvision
+Pillow
+requests
+numpy
+scikit-learn
+joblib
+faiss-cpu
+diskcache
+aiohttp
