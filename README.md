@@ -8,60 +8,115 @@ This project creates an immersive digital platform for exploring the Metropolita
 
 ## 🚀 Features
 
-- Browse the Met's extensive collection
-- Search artworks by various criteria
-- View detailed information about each piece
-- Interactive user interface for seamless exploration
+- Browse the MET's extensive collection.
+- Search artworks by various criteria.
+- View detailed information about each piece.
+- Interactive user interface for seamless exploration.
+- Personalized artwork recommendations using machine learning.
+- Optimized tour planning within galleries.
 
 ## 💻 Tech Stack
 
 ### Frontend
 
-- React.js
-- Swift
+- React.js for the web application.
+- Swift for the iOS application.
 
 ### Backend
 
-- Django
-- Poetry
-- Flask
+- Django and Flask for APIs and data management
+- Poetry for dependency management of the Django API.
+- FAISS, ResNet50, and other Python libraries for machine learning models.
 
-## 🛠️ Installation
+## 🛠️ Setup and Installation
 
 ### Prerequisites
 
-- Node.js and npm
+1. Install the following software:
+- Node.js (latest version recommended).
 - Python 3.x
 - Poetry
+- Xcode for iOS development (if building for iOS).
 
-### Setup Instructions
+2. Clone the repository:
+```bash
+   git clone https://github.com/lquincoso/ArtLens-MET-Insights.git
+   cd ArtLens-MET-Insights
+```
 
-1. **Clone the repository**
+### Step-by-Step Instructions
 
-   ```bash
-   git clone https://github.com/lquincoso/MET-Museum-ML.git
-   cd MET-Museum-ML
-   ```
+1. **Frontend (Web) Setup**
+1. Navigate to the web frontend directory
+```bash
+cd front-end/web-front
+```
+2. Install dependencies:
+```bash
+npm install
+```
+3. Start the development server:
+```bash
+npm start
+```
+   The application will be accessible at `http://localhost:3000`.
 
-2. **Frontend Setup**
+2. **Backend (Django) Setup**
+1.  Navigate to the backend directory: 
+```bash
+cd backend/Django
+``` 
+2. Create a virtual environment and activate it:
+```bash
+poetry shell
+```
+3. Install dependencies:
+```bash
+poetry install
+```
+4. Run the development server:
+```bash
+python manage.py runserver
+```
+The backend server will start at `http://localhost:8000`
 
-   ```bash
-   cd front-end/web-front
-   npm install
-   npm start
-   ```
 
-   The frontend will be available at `http://localhost:3000`
+3. **Flask API Setup and Execution**
+1. Navigate to the backend directory:
+```bash
+cd backend
+```
+2. Install the required Python dependencies:
+```bash
+pip install -r requirements.txt
+```
+3. Run the Flask API:
+```bash
+python run.py
+```
+The Flask API will start on `http://localhost:5000`.
+4. Purpose of the Flask API:
+- Tour: Provides optimized routes through museum galleries.
+- Recommendation System: Suggests visually similar artworks using ML models.
+- Educational Feature: Offers AI-generated insights and related resources for selected artworks.
+   
+4. **iOS Application Setup**
+1. Navigate to the iOS frontend directory:
+```bash
+cd ios-front/MuseumApp
+```
+2. Open the MuseumApp.xcodeproj file in Xcode.
+3. Configure the signing & team settings (if required).
+4. Build and run the application on a simulator or device.
 
-3. **Backend Setup**
-   Open a new terminal and run:
-   ```bash
-   cd backend/Django
-   poetry shell
-   poetry intall
-   python manage.py runserver
-   ```
-   The backend server will start at `http://localhost:8000`
+5. **Machine Learning Models**
+1. Navigate to the `artwork_recommendation/models/` directory.
+2. Download the required ResNet50 model weights:
+```bash
+python download_model.py
+```
+3. Ensure the models are correctly placed in the specified directory.
+
 
 ## Project Structure
 The project directory structure is as follows:
@@ -209,6 +264,7 @@ web-front/
 
 
 ## 📄 License
+This project is licensed under [MIT](https://github.com/twbs/bootstrap/blob/main/LICENSE) License.
 
 ## 👥 Authors
 
@@ -220,4 +276,4 @@ web-front/
 
 ## 🙏 Acknowledgments
 
-- Metropolitan Museum of Art for providing the API
+- Special thanks to the Metropolitan Museum of Art for providing the API that made this project possible.
