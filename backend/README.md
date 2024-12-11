@@ -5,13 +5,14 @@ The backend for ArtLens provides the essential APIs and services required to sup
 The backend serves as the foundation for the ArtLens application, with the following key responsibilities:
 
 **Django Framework:**
-Manages user data, authentication, and artwork metadata using a structured relational database.
-Serves as the primary API layer for frontend interactions.
+Manages user data, authentication, and artwork metadata using a structured relational database. Serves as the primary API layer for frontend interactions.
+
 **Flask API:**
 Provides dedicated endpoints for:
 - Tour Planning: Computes optimized routes for navigating galleries.
 - Artwork Recommendations: Leverages ML models to suggest similar artworks.
 - Educational Feature: Generates AI-driven insights and links related to artworks.
+
 **Streamlit Dashboard:**
 Offers analytics and insights into user interactions, artwork popularity, and system performance, helping museum administrators make informed decisions.
 
@@ -34,7 +35,9 @@ poetry install
 ```bash
 python manage.py runserver
 ```
-The backend server will start at `http://localhost:8000`
+The backend server will start at `http://localhost:8000`.
+
+
 
 ### Flask API Setup and Execution ###
 1. Navigate to the backend directory.
@@ -49,10 +52,7 @@ python run.py
 ```
 The Flask API will start on `http://localhost:5000`.
 
-4. Purpose of the Flask API:
-- Tour: Provides optimized routes through museum galleries.
-- Recommendation System: Suggests visually similar artworks using ML models.
-- Educational Feature: Offers AI-generated insights and related resources for selected artworks.
+
 
 ### Streamlit Dashboard ###
 1. Navigate to the admin_dashboard directory:
@@ -68,8 +68,3 @@ pip install streamlit
 streamlit run dashboard.py
 ```
 The dashboard will be accessible at `http://localhost:8501`.
-
-4. Purpose of the Dashboard:
-- User Interaction Metrics: Analyze visitor interactions, including popular artworks and navigation patterns.
-- Artwork Analytics: Identify trending pieces and engagement levels.
-- System Monitoring: Track API usage and performance
