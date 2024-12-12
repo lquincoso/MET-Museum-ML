@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ArtworkCard from "../components/ArtworkCard";
+import NoImage from "../assets/no_image.svg";
 import { ReactComponent as Star } from "../assets/star.svg";
 import AuthContext from "../context/AuthContext";
 import "./My-Gallery.css";
@@ -77,7 +78,7 @@ const MyGallery = () => {
             location: data.GalleryNumber
               ? `Gallery ${data.GalleryNumber}`
               : "Not on view",
-            primaryImage: data.primaryImage || "/api/placeholder/300/200",
+            primaryImage: data.primaryImage || NoImage,
             rating: rating.rating,
             ratedAt: new Date(rating.updated_at).toLocaleDateString(),
             userId: rating.user,
