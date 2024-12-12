@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-const swal = require("sweetalert2");
 
 const AuthContext = createContext();
 
@@ -44,28 +43,9 @@ export const AuthProvider = ({ children }) => {
       setUser(jwtDecode(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
       history("/");
-      // alert popup
-      swal.fire({
-        title: "Login Successful",
-        icon: "success",
-        toast: true,
-        timer: 3000,
-        position: "top-right",
-        timerProgressBar: true,
-        showConfirmButton: false,
-      });
     } else {
       console.log(response.status);
       console.log("there was a server issue");
-      swal.fire({
-        title: "Username or passowrd does not exists",
-        icon: "error",
-        toast: true,
-        timer: 3000,
-        position: "top-right",
-        timerProgressBar: true,
-        showConfirmButton: false,
-      });
     }
   };
 
@@ -88,16 +68,6 @@ export const AuthProvider = ({ children }) => {
 
       if (response.status === 201) {
         history("/login");
-        // alert popup
-        swal.fire({
-          title: "Registration Successful, Login Now",
-          icon: "success",
-          toast: true,
-          timer: 3000,
-          position: "top-right",
-          timerProgressBar: true,
-          showConfirmButton: false,
-        });
       } else {
         console.error("Registration failed:", data);
         throw new Error(
@@ -106,15 +76,6 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Registration error:", error);
-      swal.fire({
-        title: error.message || "An error occurred during registration",
-        icon: "error",
-        toast: true,
-        timer: 3000,
-        position: "top-right",
-        timerProgressBar: true,
-        showConfirmButton: false,
-      });
       throw error;
     }
   };
@@ -123,16 +84,6 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("authTokens");
     history("/login");
-    // alert popup
-    swal.fire({
-      title: "YOu have been logged out...",
-      icon: "success",
-      toast: true,
-      timer: 3000,
-      position: "top-right",
-      timerProgressBar: true,
-      showConfirmButton: false,
-    });
   };
 
   const refreshToken = async () => {
