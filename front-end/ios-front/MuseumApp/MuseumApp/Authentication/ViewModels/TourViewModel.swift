@@ -10,36 +10,31 @@ import MapKit
 
 @MainActor
 class TourViewModel: ObservableObject {
-    private let service = TourService()
+    private let tourService = TourService()
     
     @Published var galleries: [String: Gallery] = [:]
     @Published var path: [String] = []
     @Published var isLoading = false
-    @Published var errorMessage: String?
+    @Published var error: Error?
     
     func loadGalleries() async {
         isLoading = true
         do {
-            galleries = try await service.fetchGalleries()
-            print("Successfully loaded \(galleries.count) galleries")
-            isLoading = false
+            galleries = try await tourService.fetchGalleries()
         } catch {
-            print("Error loading galleries: \(error)")
-            errorMessage = "Failed to load galleries: \(error.localizedDescription)"
-            isLoading = false
+            self.error = error
         }
+        isLoading = false
     }
     
-    func findShortestPath(from start: String, to end: String) async {
+    func findPath(start: String, end: String) async {
         isLoading = true
         do {
-            path = try await service.getShortestPath(from: start, to: end)
-            print("Found path with \(path.count) steps")
-            isLoading = false
+            path = try await tourService.getShortestPath(start: start, end: end)
+            print("Shortest Path: \(path)")
         } catch {
-            print("Error finding path: \(error)")
-            errorMessage = "Failed to find path: \(error.localizedDescription)"
-            isLoading = false
+            self.error = error
         }
+        isLoading = false
     }
 }

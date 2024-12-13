@@ -11,37 +11,36 @@ struct ExploreView: View {
     @EnvironmentObject var artworkStore: ArtworkStore
     @State private var searchText = ""
     
-    let artworks = [
-        Artwork(id: 1, title: "One-dollar Liberty Head Coin", artist: "James Barton Longacre", location: "Gallery 774", description: "Historic American coin design", year: "1849"),
-        Artwork(id: 2, title: "Ten-dollar Liberty Head Coin", artist: "Christian Gobrecht", location: "Special Exhibition", description: "Rare numismatic specimen", year: "1838"),
-        Artwork(id: 3, title: "Ale Glass", artist: "New England Glass Company", location: "Gallery 774", description: "19th century glassware", year: "1850-1870")
-    ]
-    
     var body: some View {
         NavigationView {
-            VStack {
-                SearchBar(text: $searchText)
-                
+            if artworkStore.isLoading {
+                ProgressView()
+            } else {
                 ScrollView {
                     LazyVStack(spacing: 16) {
+                        
+                        SearchBar(text: $searchText)
+                        
                         ForEach(filteredArtworks) { artwork in
                             ArtworkCard(artwork: artwork)
                         }
                     }
                     .padding()
                 }
+                .navigationTitle("Explore")
             }
-            .navigationTitle("Explore")
+        }
+        .task {
+            await artworkStore.loadArtworks()
         }
     }
-    
     var filteredArtworks: [Artwork] {
         if searchText.isEmpty {
-            return artworkStore.artworks
+            return Array(artworkStore.artworks.values)
         } else {
-            return artworkStore.artworks.filter { artwork in
+            return artworkStore.artworks.values.filter { artwork in
                 artwork.title.lowercased().contains(searchText.lowercased()) ||
-                artwork.artist.lowercased().contains(searchText.lowercased())
+                artwork.artistDisplayName.lowercased().contains(searchText.lowercased())
             }
         }
     }

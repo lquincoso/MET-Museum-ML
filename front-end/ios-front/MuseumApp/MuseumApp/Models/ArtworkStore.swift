@@ -7,10 +7,38 @@
 
 import Foundation
 
+@MainActor
 class ArtworkStore: ObservableObject {
-    @Published var artworks: [Artwork] = [
-        Artwork(id: 1, title: "One-dollar Liberty Head Coin", artist: "James Barton Longacre", location: "Gallery 774", description: "Historic American coin design", year: "1849"),
-        Artwork(id: 2, title: "Ten-dollar Liberty Head Coin", artist: "Christian Gobrecht", location: "Special Exhibition", description: "Rare numismatic specimen", year: "1838"),
-        Artwork(id: 3, title: "Ale Glass", artist: "New England Glass Company", location: "Gallery 774", description: "19th century glassware", year: "1850-1870")
-    ]
+    @Published var artworks: [Int: Artwork] = [:]
+    @Published var isLoading = false
+    @Published var error: Error?
+    
+    func loadArtworks(query: String = "painting") async {
+        isLoading = true
+        do {
+            let ids = try await ArtworkService.searchArtworks(query: query)
+            var loadedArtworks: [Int: Artwork] = [:]
+            
+            let filteredIds = ids.filter { $0 >= 436500 && $0 <= 436510 }
+            
+            for id in filteredIds {
+                if let details = try? await ArtworkService.fetchArtworkDetails(imageID: id) {
+                    let artwork = Artwork(
+                        id: id,
+                        primaryImage: details["imageUrl"] ?? "",
+                        title: details["title"] ?? "",
+                        artistDisplayName: details["artist"] ?? "",
+                        culture: details["culture"] ?? "",
+                        objectBeginDate: Int(details["year"] ?? "0") ?? 0
+                    )
+                    loadedArtworks[id] = artwork
+                }
+            }
+            
+            self.artworks = loadedArtworks
+        } catch {
+            self.error = error
+        }
+        isLoading = false
+    }
 }

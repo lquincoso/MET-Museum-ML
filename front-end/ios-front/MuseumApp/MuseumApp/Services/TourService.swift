@@ -8,44 +8,33 @@
 import Foundation
 
 class TourService {
-    private let baseURL = "http://127.0.0.1:5000/api"
+    private let baseUrl = "http://127.0.0.1:5000/tour"
     
     func fetchGalleries() async throws -> [String: Gallery] {
-        guard let url = URL(string: "\(baseURL)/galleries") else {
+        guard let url = URL(string: "\(baseUrl)/galleries") else {
             throw URLError(.badURL)
         }
         
         let (data, _) = try await URLSession.shared.data(from: url)
-        
-        if let jsonString = String(data: data, encoding: .utf8) {
-            print("Received JSON: \(jsonString)")
-        }
-        
-        do {
-            return try JSONDecoder().decode([String: Gallery].self, from: data)
-        } catch {
-            print("Decoding error: \(error)")
-            throw error
-        }
+        return try JSONDecoder().decode([String: Gallery].self, from: data)
     }
     
-    func getShortestPath(from start: String, to end: String) async throws -> [String] {
-        guard let url = URL(string: "\(baseURL)/shortest-path?start=\(start)&end=\(end)") else {
+    func getShortestPath(start: String, end: String) async throws -> [String] {
+        guard var components = URLComponents(string: "\(baseUrl)/shortest-path") else {
+            throw URLError(.badURL)
+        }
+        
+        components.queryItems = [
+            URLQueryItem(name: "start", value: start),
+            URLQueryItem(name: "end", value: end)
+        ]
+        
+        guard let url = components.url else {
             throw URLError(.badURL)
         }
         
         let (data, _) = try await URLSession.shared.data(from: url)
-        
-        if let jsonString = String(data: data, encoding: .utf8) {
-            print("Received Path JSON: \(jsonString)")
-        }
-        
-        do {
-            let response = try JSONDecoder().decode(PathResponse.self, from: data)
-            return response.path
-        } catch {
-            print("Path decoding error: \(error)")
-            throw error
-        }
+        let response = try JSONDecoder().decode(PathResponse.self, from: data)
+        return response.path
     }
 }
