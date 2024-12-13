@@ -11,3 +11,4 @@ joblib
 faiss-cpu
 diskcache
 aiohttp
+streamlit
