@@ -12,3 +12,6 @@ faiss-cpu
 diskcache
 aiohttp
 streamlit
+pymysql
+pandas
+matplotlib
