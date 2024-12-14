@@ -142,10 +142,11 @@ The project directory structure is as follows:
 ```css
 backend/
 ├── admin_dashboard/
+│   ├── database_utils/
+│   │   ├── Populate-Dashboard.sql
+│   │   └── Use-Dashboard.sql
 │   ├── dashboard.py
-│   ├── keys_example.txt
-│   ├── README.md
-│   └── requirements.txt
+│   └── keys_example.txt
 ├── artwork_recommendation/
 │   ├── app/
 │   │   ├── data/
