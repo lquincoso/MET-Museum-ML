@@ -162,8 +162,7 @@ backend/
 │   │   ├── met_api.py
 │   │   ├── recommender.py
 │   │   └── routes.py
-│   ├── __init__.py
-│   └── README.md
+│   └── __init__.py
 ├── django/
 │   ├── api/
 │   │   ├── migrations/
@@ -206,36 +205,36 @@ backend/
 │   └── requirements.txt
 ├── __init__.py
 ├── requirements.txt
+├── README.md
 └── run.py
 ```
 
 ### Frontend - iOS
 ```css
 ios-front/
-├── MuseumApp/
-│   ├── Fonts/
-│   │   ├── OpenSans-Regular.ttf
-│   │   ├── OpenSans-SemiBold.ttf
-│   │   ├── PlayfairDisplay-Bold.ttf
-│   │   └── PlayfairDisplay-SemiBold.ttf
-│   ├── MuseumApp/
-│   │   ├── Assets.xcassets/
-│   │   ├── Authentication/
-│   │   ├── Extensions/
-│   │   ├── Models/
-│   │   ├── Preview Content/
-│   │   ├── Services/
-│   │   ├── Views/
-│   │   ├── ContentView.swift
-│   │   ├── Info.plist
-│   │   ├── MuseumAppApp.swift
-│   │   ├── MuseumTabView.swift
-│   │   └── Styles.swift
-│   └── MuseumApp.xcodeproj/
-│       ├── project.xcworkspace
-│       ├── xcuserdata/
-│       └── project.pbxproj
-└── README.md
+└── MuseumApp/
+    ├── Fonts/
+    │   ├── OpenSans-Regular.ttf
+    │   ├── OpenSans-SemiBold.ttf
+    │   ├── PlayfairDisplay-Bold.ttf
+    │   └── PlayfairDisplay-SemiBold.ttf
+    ├── MuseumApp/
+    │   ├── Assets.xcassets/
+    │   ├── Authentication/
+    │   ├── Extensions/
+    │   ├── Models/
+    │   ├── Preview Content/
+    │   ├── Services/
+    │   ├── Views/
+    │   ├── ContentView.swift
+    │   ├── Info.plist
+    │   ├── MuseumAppApp.swift
+    │   ├── MuseumTabView.swift
+    │   └── Styles.swift
+    └── MuseumApp.xcodeproj/
+        ├── project.xcworkspace
+        ├── xcuserdata/
+        └── project.pbxproj
 ```
 
 ### Frontend - Web Frontend
