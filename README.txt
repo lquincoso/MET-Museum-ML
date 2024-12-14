@@ -4,14 +4,15 @@
 A web and ios application that provides an interactive online experience of the Metropolitan Museum of Art through their public API.
 
 ==============================================================================================================================================================
-
-🎨 Project Overview
+ --------------------
+|🎨 Project Overview|
+ --------------------
 This project creates an immersive digital platform for exploring the Metropolitan Museum of Art's extensive collection. Users can discover artworks, learn about different periods and artists, and experience the museum's treasures from anywhere in the world.
 
 ==============================================================================================================================================================
-
-🚀 Features
-
+ ------------
+|🚀 Features|
+ ------------
 - Browse the MET's extensive collection.
 - Search artworks by various criteria.
 - View detailed information about each piece.
@@ -20,9 +21,9 @@ This project creates an immersive digital platform for exploring the Metropolita
 - Optimized tour planning within galleries.
 
 ==============================================================================================================================================================
-
-💻 Tech Stack
-
+ --------------
+|💻 Tech Stack |
+ --------------
 Frontend
 
 - React.js for the web application.
@@ -35,11 +36,11 @@ Backend
 - FAISS, ResNet50, and other Python libraries for machine learning models.
 
 ==============================================================================================================================================================
-
-🛠️ Setup and Installation
-
+ -------------------------
+|🛠️ Setup and Installation|
+ -------------------------
 Prerequisites
-
+-------------
 1. Install the following software:
 - Node.js (latest version recommended).
 - Python 3.x
@@ -51,9 +52,9 @@ Prerequisites
    git clone https://github.com/lquincoso/ArtLens-MET-Insights.git
    cd ArtLens-MET-Insights
 ```
-__________________________
-Step-by-Step Instructions |
-__________________________
+
+Step-by-Step Instructions 
+-------------------------
 
 Frontend (Web) Setup 
 1. Navigate to the web frontend directory
@@ -69,7 +70,8 @@ npm install
 npm start
 ```
 The application will be accessible at `http://localhost:3000`.
-_____________________________________________________________________
+---------------------------------------------------------------------------
+
 Backend (Django) Setup
 1.  Navigate to the backend directory: 
 ```bash
@@ -88,8 +90,9 @@ poetry install
 python manage.py runserver
 ```
 The backend server will start at `http://localhost:8000`
-_____________________________________________________________________
- Flask API Setup and Execution
+---------------------------------------------------------------------------
+ 
+Flask API Setup and Execution
 1. Navigate to the backend directory:
 ```bash
 cd backend
@@ -107,7 +110,8 @@ The Flask API will start on `http://localhost:5000`.
 - Tour: Provides optimized routes through museum galleries.
 - Recommendation System: Suggests visually similar artworks using ML models.
 - Educational Feature: Offers AI-generated insights and related resources for selected artworks.
-_____________________________________________________________________
+---------------------------------------------------------------------------
+
 Streamlit Dashboard
 1. Navigate to the admin_dashboard directory:
 ```bash
@@ -126,7 +130,8 @@ The dashboard will be accessible at `http://localhost:8501`.
 - User Interaction Metrics: Analyze visitor interactions, including popular artworks and navigation patterns.
 - Artwork Analytics: Identify trending pieces and engagement levels.
 - System Monitoring: Track API usage and performance
-_____________________________________________________________________   
+---------------------------------------------------------------------------   
+
 iOS Application Setup
 1. Navigate to the iOS frontend directory:
 ```bash
@@ -145,10 +150,13 @@ python download_model.py
 3. Ensure the models are correctly placed in the specified directory.
 
 ==============================================================================================================================================================
-Project Structure
+ ------------------
+|Project Structure|
+ ------------------
 The project directory structure is as follows:
 
-### Backend
+Backend
+--------
 ```css
 backend/
 ├── admin_dashboard/
@@ -218,7 +226,8 @@ backend/
 └── run.py
 ```
 
-### Frontend - iOS
+Frontend - iOS
+--------------
 ```css
 ios-front/
 ├── MuseumApp/
@@ -247,7 +256,8 @@ ios-front/
 └── README.md
 ```
 
-### Frontend - Web Frontend
+Frontend - Web Frontend
+-----------------------
 ```css
 web-front/
 ├── node_modules/
@@ -290,18 +300,22 @@ web-front/
 ```
 
 ==============================================================================================================================================================
-
-📄 License
+ -----------
+|📄 License|
+ -----------
 This project is licensed under [MIT](https://github.com/twbs/bootstrap/blob/main/LICENSE) License.
 
- 👥 Authors
-
+==============================================================================================================================================================
+ -----------
+|👥 Authors|
+ -----------
 - Lorena A. Quincoso Lugones
 - Dory Apollon
 - Niccholas Reiz
 - Ariel Ramos Perez
 - Mauricio Piedra
-
-🙏 Acknowledgments
-
+==============================================================================================================================================================
+ -------------------
+|🙏 Acknowledgments|
+ -------------------
 - Special thanks to the Metropolitan Museum of Art for providing the API that made this project possible.
